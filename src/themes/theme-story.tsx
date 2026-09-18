@@ -1,10 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { Fragment, useEffect, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { ArrowDown, ArrowUpRight, Mail, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { EASE, Magnetic, Marquee, Reveal } from "@/lib/anim";
+import { EASE, Magnetic, Reveal } from "@/lib/anim";
 import {
   heroSticky,
   nav,
@@ -461,6 +470,79 @@ function StoryTitle({
   );
 }
 
+const TICKER_COPIES = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
+function Ticker({
+  children,
+  className,
+  speed = 70,
+  reverse = false,
+  repeat = 3,
+  pauseOnHover = true,
+  fade = true,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  speed?: number;
+  reverse?: boolean;
+  repeat?: number;
+  pauseOnHover?: boolean;
+  fade?: boolean;
+}) {
+  const x = useMotionValue(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const paused = useRef(false);
+  const reduce = useReducedMotion();
+  const dir = reverse ? 1 : -1;
+
+  useAnimationFrame((_, delta) => {
+    if (reduce || paused.current) return;
+    const el = trackRef.current;
+    if (!el) return;
+    const half = el.scrollWidth / 2;
+    if (!half) return;
+    let next = x.get() + (dir * speed * delta) / 1000;
+    if (next <= -half) next += half;
+    else if (next > 0) next -= half;
+    x.set(next);
+  });
+
+  return (
+    <div
+      className={cn(
+        "relative flex w-full select-none overflow-hidden",
+        fade &&
+          "[mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]",
+        className
+      )}
+      onMouseEnter={() => {
+        if (pauseOnHover) paused.current = true;
+      }}
+      onMouseLeave={() => {
+        paused.current = false;
+      }}
+    >
+      <motion.div
+        ref={trackRef}
+        style={{ x }}
+        className="flex w-max will-change-transform"
+      >
+        {[{ id: "first" }, { id: "second" }].map(({ id }, h) => (
+          <div
+            key={id}
+            aria-hidden={h === 1}
+            className="flex shrink-0 items-center"
+          >
+            {TICKER_COPIES.slice(0, repeat).map((c) => (
+              <Fragment key={c}>{children}</Fragment>
+            ))}
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 function DividerMarquee({ volt = false }: { volt?: boolean }) {
   const items = [
     "Storytelling",
@@ -479,7 +561,7 @@ function DividerMarquee({ volt = false }: { volt?: boolean }) {
         volt ? "bg-volt text-night" : "bg-ember text-paper"
       )}
     >
-      <Marquee duration={26}>
+      <Ticker speed={80}>
         {items.map((t) => (
           <span
             key={t}
@@ -489,7 +571,7 @@ function DividerMarquee({ volt = false }: { volt?: boolean }) {
             <Sparkles className="h-3 w-3" />
           </span>
         ))}
-      </Marquee>
+      </Ticker>
     </div>
   );
 }
@@ -638,7 +720,7 @@ function SectionCraft() {
           </div>
         </div>
         <div className="mt-20 border-t border-white/10 pt-9">
-          <Marquee duration={24}>
+          <Ticker speed={55}>
             {tools.map((t) => (
               <span
                 key={t}
@@ -648,7 +730,7 @@ function SectionCraft() {
                 <Sparkles className="h-3 w-3 text-volt" />
               </span>
             ))}
-          </Marquee>
+          </Ticker>
         </div>
       </div>
     </section>
@@ -724,7 +806,7 @@ const RATIOS = ["aspect-[4/3]", "aspect-square", "aspect-[4/5]", "aspect-[4/3]"]
 function TitleMarquee() {
   return (
     <div className="relative overflow-hidden border-y border-ink/10 bg-paperdeep/60 py-3.5">
-      <Marquee duration={42}>
+      <Ticker speed={70}>
         {projects.map((p) => (
           <span
             key={p.id}
@@ -736,7 +818,7 @@ function TitleMarquee() {
             </span>
           </span>
         ))}
-      </Marquee>
+      </Ticker>
     </div>
   );
 }
@@ -944,12 +1026,12 @@ function Footer() {
   return (
     <footer className="bg-night">
       <div className="overflow-hidden bg-volt py-3 text-night">
-        <Marquee duration={34}>
+        <Ticker speed={95} repeat={6}>
           <span className="flex items-center gap-10 px-6 font-mono text-[11px] uppercase tracking-[0.26em]">
             Thanks for reading
             <Sparkles className="h-3 w-3" />
           </span>
-        </Marquee>
+        </Ticker>
       </div>
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-10 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45 md:px-10">
         <span>© 2026 Apurba Dutta — designed with obsession</span>
