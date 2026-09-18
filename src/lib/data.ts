@@ -1,0 +1,303 @@
+export const profile = {
+  name: "Apurba Dutta",
+  alias: "Eden",
+  title: "Senior Graphic Designer | UI/UX & Visual Design",
+  company: "Swiggy",
+  location: "Bengaluru, India",
+  status: "Aiming for a Lead Designer role",
+  memberSince: 2019,
+  experience: "5.5 years",
+  summary:
+    "Innovative design leader with 5.5 years of experience in developing comprehensive visual systems for high-growth consumer platforms, including performance marketing, brand partnerships, and product design. Expertise in enhancing design workflows through Figma, mentoring design teams, and aligning visual strategies with business objectives. Aiming for a Lead Designer role to drive creative initiatives and foster team collaboration.",
+  email: "duttaapurba997@gmail.com",
+};
+
+export const nav = [
+  { label: "The Designer", href: "#designer" },
+  { label: "The Craft", href: "#craft" },
+  { label: "The Work", href: "#work" },
+  { label: "The Road", href: "#road" },
+];
+
+export const socials = [
+  {
+    label: "Behance",
+    href: "https://www.behance.net/apurbadutta3",
+    handle: "behance.net/apurbadutta3",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/apurba-dutta-a50725184/",
+    handle: "in/apurba-dutta",
+  },
+];
+
+export const heroSticky = {
+  kicker: "Prologue — Bengaluru, India",
+  headlineLead: "Stories hit",
+  headlineAccent: "harder.",
+  sub:
+    "Turning ideas into thoughtful experiences through strategy, storytelling, and intentional design.",
+  personality:
+    "Five and a half years making consumer platforms speak — across performance marketing, brand partnerships and product design.",
+};
+
+export type Project = {
+  id: string;
+  title: string;
+  category:
+    | "UI/UX"
+    | "Branding"
+    | "Campaign"
+    | "Packaging"
+    | "Social · Ads"
+    | "Motion"
+    | "Illustration";
+  cover: string;
+  href: string;
+  blurb: string;
+};
+
+export const projects: Project[] = [
+  {
+    id: "01",
+    title: "CRM Tool UI Design",
+    category: "UI/UX",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/c69803180565011.Y3JvcCw5NzAsNzU5LDIxMywzMQ.png",
+    href: "https://www.behance.net/gallery/180565011/CRM-Tool-UI-Design",
+    blurb: "A clean, data-dense CRM workspace with a calm hierarchy.",
+  },
+  {
+    id: "02",
+    title: "Rebranding — Electronic",
+    category: "Branding",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/7ef179237528709.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
+    href: "https://www.behance.net/gallery/237528709/Rebranding-electronic",
+    blurb: "A full identity refresh for an electronics brand.",
+  },
+  {
+    id: "03",
+    title: "E-commerce Website UI",
+    category: "UI/UX",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/7eeb80180598107.Y3JvcCwzMTQzLDI0NTksNTI5LDA.png",
+    href: "https://www.behance.net/gallery/180598107/E-commerce-website-UI",
+    blurb: "Product-first storefront design built to convert.",
+  },
+  {
+    id: "04",
+    title: "Merry Christmas — Festive Campaign",
+    category: "Campaign",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/e7d174223373985.Y3JvcCwzMTQzLDI0NTksNDI3LDA.png",
+    href: "https://www.behance.net/gallery/223373985/Merry-Christmas-Festive-campaign",
+    blurb: "A warm holiday campaign with custom illustration.",
+  },
+  {
+    id: "05",
+    title: "Festive Campaign — Mother's Day",
+    category: "Campaign",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/eded8e208651001.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
+    href: "https://www.behance.net/gallery/208651001/Festive-campaign-(mothers-day)",
+    blurb: "Emotional storytelling for the biggest gifting day.",
+  },
+  {
+    id: "06",
+    title: "Interactive Campaign — Father's Day",
+    category: "Campaign",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/7182d3208651645.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
+    href: "https://www.behance.net/gallery/208651645/Interactive-campaign-(Fathers-day)",
+    blurb: "A playful, interactive moment for Father's Day.",
+  },
+  {
+    id: "07",
+    title: "Indian Festive Campaign",
+    category: "Campaign",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/aad9e6212853771.Y3JvcCwzMTQzLDI0NTksMzk2LDA.png",
+    href: "https://www.behance.net/gallery/212853771/Indian-Festive-Campaign",
+    blurb: "Rooted in Indian festive richness and ritual color.",
+  },
+  {
+    id: "08",
+    title: "Banner Projects",
+    category: "Social · Ads",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/dc5a2c185724507.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
+    href: "https://www.behance.net/gallery/185724507/Banner-projects",
+    blurb: "A system of banners that stay sharp at every size.",
+  },
+  {
+    id: "09",
+    title: "Advertisements Projects",
+    category: "Social · Ads",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/daaef8185723577.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
+    href: "https://www.behance.net/gallery/185723577/Advertisements-projects",
+    blurb: "Ad creatives engineered for the thumb-scroll.",
+  },
+  {
+    id: "10",
+    title: "Carousel Projects",
+    category: "Social · Ads",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/dfb44f185713113.Y3JvcCwzMTQzLDI0NTksNTI5LDA.png",
+    href: "https://www.behance.net/gallery/185713113/Carousel-projects",
+    blurb: "Story-led carousels that people actually swipe.",
+  },
+  {
+    id: "11",
+    title: "Packaging Design — Edible Oils",
+    category: "Packaging",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/187bb4148367831.Y3JvcCw5NDMsNzM3LDAsNDI.png",
+    href: "https://www.behance.net/gallery/148367831/Packaging-design-2",
+    blurb: "Shelf-first packaging that feels premium and honest.",
+  },
+  {
+    id: "12",
+    title: "Logo Design — Set of Marks",
+    category: "Branding",
+    cover:
+      "https://mir-s3-cdn-cf.behance.net/projects/404/c8bf59147595087.Y3JvcCw3MzIsNTcyLDg1LDA.png",
+    href: "https://www.behance.net/gallery/147595087/Logo-design-1",
+    blurb: "Distinctive wordmarks and symbols with real character.",
+  },
+];
+
+export type Role = {
+  company: string;
+  role: string;
+  period: string;
+  place: string;
+  points: string[];
+};
+
+export const experience: Role[] = [
+  {
+    company: "Swiggy",
+    role: "Senior Graphic Designer",
+    period: "01/2024 — Present",
+    place: "Bengaluru, India",
+    points: [
+      "Owned end-to-end design for credit card product promotions, translating financial features into conversion-driven campaigns.",
+      "Crafted the visual identity for Swiggy ONE BLCK, partnering with restaurant and sponsor brands on offer-led creative.",
+      "Led design collaboration with JioHotstar on entertainment and sports partnerships — from the food campaign for Dhurandhar to IPL promotional creative.",
+      "Directed creative strategy for Central Growth initiatives, building scalable, multi-format creative systems.",
+    ],
+  },
+  {
+    company: "BuyMore",
+    role: "Senior Graphic Designer",
+    period: "08/2022 — 12/2023",
+    place: "Bengaluru, India",
+    points: [
+      "Created 100% original artwork across print, web and video, alongside motion graphics for sites and apps.",
+      "Designed mocks and workflows for approval, quality-checked agency files, and coordinated master files for outsourcing.",
+      "Mentored junior designers and elevated overall team output standards.",
+      "Worked with UX and product teams on wireframes, mockups and UI within frontend frameworks.",
+    ],
+  },
+  {
+    company: "AI Probably",
+    role: "Graphic Designer",
+    period: "09/2021 — 07/2022",
+    place: "Delhi, India",
+    points: [
+      "Composed guideline-oriented designs for Amazon and Flipkart advertisements.",
+      "Devised site maps and mockups based on proven methodologies and user feedback.",
+      "Ran competitive analysis and trend research to design ahead of the market.",
+      "Built theme-based reels and promotional video plans.",
+    ],
+  },
+  {
+    company: "Karmic Events India",
+    role: "Graphic Design Intern",
+    period: "04/2019 — 05/2019",
+    place: "Delhi, India",
+    points: [
+      "Promoted events through posters, digital invites and brochures.",
+      "Produced layouts in Photoshop, Illustrator and InDesign — the origin of the craft.",
+    ],
+  },
+];
+
+export const education = [
+  {
+    school: "Amity University, Noida",
+    degree: "Bachelor in Fashion Designing",
+    period: "2021",
+  },
+  {
+    school: "G.D. Goenka Public School, Siliguri",
+    degree: "Intermediate — Science",
+    period: "2017",
+  },
+  {
+    school: "St. Mary's High School, Cooch Behar",
+    degree: "Matriculation",
+    period: "2015",
+  },
+];
+
+export const skillGroups = [
+  {
+    index: "01",
+    title: "Design Craft",
+    items: [
+      "UI/UX Design",
+      "Digital Illustration",
+      "Brand Identity Design",
+      "Print & Campaign Design",
+      "Motion / Animation Workflows",
+      "Social Media Graphics",
+    ],
+  },
+  {
+    index: "02",
+    title: "Systems & Teams",
+    items: [
+      "Creative Direction",
+      "Cross-Functional Collaboration",
+      "Stakeholder Management",
+      "Visual Storytelling",
+      "Design Systems",
+      "Mentoring Designers",
+    ],
+  },
+  {
+    index: "03",
+    title: "Software",
+    items: [
+      "Figma",
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Adobe Premiere Pro",
+      "Framer",
+    ],
+  },
+];
+
+export const tools = [
+  "Figma",
+  "Photoshop",
+  "Illustrator",
+  "InDesign",
+  "Premiere Pro",
+  "Framer",
+];
+
+export const skills = skillGroups.flatMap((g) => g.items);
+
+export const languages = ["English", "Hindi", "Bengali", "Japanese"];
+
+export const interests = [
+  "Video gaming",
+  "Sports & dance",
+  "Miniature houses",
+];
