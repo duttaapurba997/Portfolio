@@ -12,7 +12,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Download, Heart, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Mail, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { EASE, Magnetic, Reveal } from "@/lib/anim";
 import {
@@ -881,7 +881,6 @@ function ProjectCard({
   ratio: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [liked, setLiked] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -890,63 +889,41 @@ function ProjectCard({
   return (
     <div ref={ref} className={cn("group", flip && "md:mt-28")}>
       <BorderGlow
-        edgeSensitivity={30}
+        edgeSensitivity={14}
         glowColor="40 80 80"
         backgroundColor="#120F17"
-        borderRadius={28}
-        glowRadius={40}
-        glowIntensity={1.0}
-        coneSpread={25}
+        borderRadius={22}
+        glowRadius={59}
+        glowIntensity={0.6}
+        coneSpread={20}
         animated={false}
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
         className="border border-white/10"
       >
         <Link href={`/projects/${p.id}`} className="block">
-          <div className="p-2">
-            <div className={cn("relative overflow-hidden rounded-[20px]", ratio)}>
-              <motion.img
-                src={p.cover}
-                alt={p.title}
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                style={{ y }}
-                className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
-              />
-              <span className="absolute left-4 top-4 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-md">
-                {p.category}
-              </span>
-              <button
-                type="button"
-                aria-label={`Like ${p.title}`}
-                aria-pressed={liked}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setLiked((v) => !v);
-                }}
-                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-night/70 backdrop-blur-md transition-transform hover:scale-110 active:scale-95"
-              >
-                <Heart
-                  className={cn(
-                    "h-4 w-4 transition-colors",
-                    liked ? "fill-volt text-volt" : "text-white/70"
-                  )}
-                />
-              </button>
-            </div>
+          <div className={cn("relative overflow-hidden", ratio)}>
+            <motion.img
+              src={p.cover}
+              alt={p.title}
+              referrerPolicy="no-referrer"
+              loading="lazy"
+              style={{ y }}
+              className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
+            />
+            <span className="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm">
+              {p.category}
+            </span>
           </div>
-          <div className="flex items-center justify-between gap-4 px-5 pb-5 pt-3">
+          <div className="flex items-center justify-between gap-4 px-5 py-4">
             <div className="min-w-0">
-              <h3 className="truncate font-serif text-xl font-semibold leading-tight text-white">
+              <h3 className="truncate font-serif text-xl leading-tight text-white transition-colors group-hover:text-volt">
                 {p.title}
               </h3>
-              <p className="mt-1.5 font-mono text-[15px] tracking-[0.08em] text-white">
+              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
                 № {p.id}
               </p>
             </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white transition-transform duration-300 group-hover:scale-105">
-              <ArrowUpRight className="h-5 w-5 text-night" />
-            </span>
+            <ArrowUpRight className="h-5 w-5 shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt" />
           </div>
         </Link>
       </BorderGlow>
