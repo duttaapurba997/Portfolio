@@ -330,7 +330,7 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-night bg-grid-volt text-white"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-night text-white"
     >
       <LiquidEther
         colors={["#5227FF", "#FF9FFC", "#B497CF"]}
@@ -746,7 +746,7 @@ function ToolMark({ name }: { name: string }) {
 
 function SectionCraft() {
   return (
-    <section id="craft" className="relative isolate bg-night bg-grid-volt text-white">
+    <section id="craft" className="relative isolate bg-night text-white">
       <LiquidEther
         colors={["#5227FF", "#FF9FFC", "#B497CF"]}
         mouseForce={20}
@@ -950,7 +950,7 @@ function TitleMarquee() {
 
 function FeaturedWork() {
   return (
-    <section id="work" className="relative isolate overflow-hidden bg-night bg-grid-volt text-white">
+    <section id="work" className="relative isolate overflow-hidden bg-night text-white">
       <LiquidEther
         colors={["#5227FF", "#FF9FFC", "#B497CF"]}
         mouseForce={20}
@@ -1017,7 +1017,7 @@ function FeaturedWork() {
 
 function SectionRoad() {
   return (
-    <section id="road" className="relative isolate bg-night bg-grid-volt text-white">
+    <section id="road" className="relative isolate bg-night text-white">
       <LiquidEther
         colors={["#5227FF", "#FF9FFC", "#B497CF"]}
         mouseForce={20}
