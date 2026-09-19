@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/data";
 import { EASE } from "@/lib/anim";
 import { Dither } from "@/components/Dither";
+import { BorderGlow } from "@/components/BorderGlow";
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
@@ -80,40 +81,62 @@ export function ProjectDetail({ project, projects }: { project: Project; project
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-            className="mt-12 overflow-hidden rounded-2xl border border-white/10"
+            className="mt-12"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.cover}
-              alt={project.title}
-              className="aspect-[4/3] w-full object-cover"
-            />
+            <BorderGlow
+              edgeSensitivity={42}
+              glowColor="40 80 80"
+              backgroundColor="#050506"
+              borderRadius={23}
+              glowRadius={48}
+              glowIntensity={0.8}
+              coneSpread={23}
+              animated
+              colors={["#c084fc", "#f472b6", "#38bdf8"]}
+            >
+              <div className="relative flex min-h-[72vh] items-center justify-center overflow-hidden bg-[#050506] p-6 md:p-12">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={project.cover}
+                  alt=""
+                  aria-hidden
+                  className="absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-[30px]"
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={project.cover}
+                  alt={project.title}
+                  className="relative z-10 max-h-[66vh] w-auto max-w-full object-contain drop-shadow-2xl"
+                />
+              </div>
+            </BorderGlow>
           </motion.div>
 
           <div className="mt-12 grid gap-8 md:grid-cols-[1fr_280px]">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/40">
-                Case status
+                The work
               </p>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/60">
-                {project.blurb} Full project, story and final frames live on
-                Behance — open the case to walk through it piece by piece.
+                {project.blurb} Presented full-frame above, at native
+                resolution — no crops, no thumbnails. Hover the edges of the
+                frame to light it up.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-volt px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-night transition-transform hover:scale-[1.03]"
-                >
-                  Open case on Behance <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
                 <Link
                   href="/#work"
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-volt hover:text-volt"
                 >
                   Back to all work
                 </Link>
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 underline-offset-4 transition-colors hover:text-volt hover:underline"
+                >
+                  Full case · Behance <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
             <div className="space-y-0">

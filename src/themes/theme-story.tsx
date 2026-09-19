@@ -11,7 +11,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Mail, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { EASE, Magnetic, Reveal } from "@/lib/anim";
 import {
@@ -30,6 +30,7 @@ import {
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Dither } from "@/components/Dither";
+import { BorderGlow } from "@/components/BorderGlow";
 
 function WordReveal({
   text,
@@ -195,13 +196,13 @@ function Nav() {
             </a>
           ))}
         </nav>
-        <a
-          href={`mailto:${profile.email}`}
+        <Link
+          href="/resume?download=1"
           className="inline-flex items-center gap-2 rounded-full bg-volt px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-night transition-transform hover:scale-[1.03]"
         >
-          <Mail className="h-3 w-3" />
-          Let&apos;s talk
-        </a>
+          <Download className="h-3.5 w-3.5" />
+          Resume
+        </Link>
       </div>
     </motion.header>
   );
@@ -768,44 +769,51 @@ function ProjectCard({
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
   return (
     <div ref={ref} className={cn("group", flip && "md:mt-28")}>
-      <Link href={`/projects/${p.id}`} className="block">
-        <div
-          className={cn(
-            "relative overflow-hidden rounded-2xl border border-ink/10 bg-paperdeep",
-            ratio
-          )}
-        >
-          <motion.img
-            src={p.cover}
-            alt={p.title}
-            referrerPolicy="no-referrer"
-            loading="lazy"
-            style={{ y }}
-            className="h-full w-full scale-[1.18] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.28]"
-          />
-          <span className="absolute left-4 top-4 rounded-full bg-paper/85 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-ink backdrop-blur-sm">
-            {p.category}
-          </span>
-          <span className="absolute right-4 top-4 font-serif text-3xl italic text-ink/25 transition-colors group-hover:text-volt">
-            {p.id}
-          </span>
-          <span className="absolute inset-x-0 bottom-0 translate-y-full bg-ink/85 px-5 py-4 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-y-0">
-            <span className="block text-sm leading-snug text-white/85">
-              {p.blurb}
+      <BorderGlow
+        edgeSensitivity={42}
+        glowColor="40 80 80"
+        backgroundColor="#000000"
+        borderRadius={23}
+        glowRadius={48}
+        glowIntensity={0.8}
+        coneSpread={23}
+        animated
+        colors={["#c084fc", "#f472b6", "#38bdf8"]}
+      >
+        <Link href={`/projects/${p.id}`} className="block">
+          <div className={cn("relative overflow-hidden", ratio)}>
+            <motion.img
+              src={p.cover}
+              alt={p.title}
+              referrerPolicy="no-referrer"
+              loading="lazy"
+              style={{ y }}
+              className="h-full w-full scale-[1.18] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.28]"
+            />
+            <span className="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm">
+              {p.category}
             </span>
-            <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-volt">
-              Open the story
-              <ArrowUpRight className="h-3 w-3" />
+            <span className="absolute right-4 top-4 font-serif text-3xl italic text-white/25 transition-colors group-hover:text-volt">
+              {p.id}
             </span>
-          </span>
-        </div>
-        <div className="mt-5 flex items-center justify-between gap-4 border-t border-ink/15 pt-4">
-          <h3 className="font-serif text-2xl leading-tight transition-colors group-hover:text-ember md:text-[1.65rem]">
-            {p.title}
-          </h3>
-          <ArrowUpRight className="h-5 w-5 shrink-0 -translate-x-1 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
-        </div>
-      </Link>
+            <span className="absolute inset-x-0 bottom-0 translate-y-full bg-night/90 px-5 py-4 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-y-0">
+              <span className="block text-sm leading-snug text-white/85">
+                {p.blurb}
+              </span>
+              <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-volt">
+                Open the story
+                <ArrowUpRight className="h-3 w-3" />
+              </span>
+            </span>
+          </div>
+          <div className="mt-5 flex items-center justify-between gap-4 border-t border-white/10 px-1 pt-4">
+            <h3 className="font-serif text-2xl leading-tight text-white transition-colors group-hover:text-volt md:text-[1.65rem]">
+              {p.title}
+            </h3>
+            <ArrowUpRight className="h-5 w-5 shrink-0 -translate-x-1 translate-y-1 text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+          </div>
+        </Link>
+      </BorderGlow>
     </div>
   );
 }

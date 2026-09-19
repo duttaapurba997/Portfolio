@@ -15,7 +15,8 @@ bottom corner links between them.
 | `/dark` | **Dark Gallery** | Near-black canvas, electric volt accent, cinematic hover grid, scroll progress |
 | `/concept` | **Concept Spec** | Monochrome "designer spec sheet" with stamps, checkboxes, ledger-style work log |
 | `/design-system` | **Design System** | Geist-style docs: principles, color, typography, grid & materials, component library, tokens |
-| `/projects/[id]` | **Project stories** | 12 interactive pages (01–12) with animated Dither background; full case opens on Behance |
+| `/projects/[id]` | **Project stories** | 12 interactive pages (01–12) with animated Dither background + BorderGlow HD showcase; case stays linked on Behance |
+| `/resume` | **Resume** | Print-ready resume from `data.ts`; "Download" saves as PDF (`?download=1` auto-opens print) |
 
 All three render the same real content from `src/lib/data.ts`, so switching
 themes never splits your content.
