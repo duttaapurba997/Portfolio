@@ -24,7 +24,23 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   const next = projects[(index + 1) % projects.length];
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    const toTop = () => window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    toTop();
+    let touched = false;
+    const onTouch = () => {
+      touched = true;
+    };
+    const onLoad = () => {
+      if (!touched) toTop();
+    };
+    window.addEventListener("wheel", onTouch, { passive: true });
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    window.addEventListener("load", onLoad);
+    return () => {
+      window.removeEventListener("wheel", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("load", onLoad);
+    };
   }, []);
 
   return (

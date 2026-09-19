@@ -115,10 +115,10 @@ export function BorderGlow({
     let raf = 0;
 
     const loop = (now: number) => {
-      const t = now - t0;
-      const idx = Math.floor(t / period) % palette.length;
+      const t = Math.max(0, now - t0);
+      const idx = palette.length > 0 ? Math.floor(t / period) % palette.length : 0;
       const p = (t % period) / period;
-      const mix = mixRgb(palette[idx], palette[(idx + 1) % palette.length], p);
+      const mix = mixRgb(palette[idx] ?? [0, 0, 0], palette[(idx + 1) % palette.length] ?? [0, 0, 0], p);
       glow.style.background = `radial-gradient(ellipse at 50% 50%, ${rgba(mix, 1)} 0%, ${rgba(mix, 0.9)} 26%, transparent 64%)`;
       raf = requestAnimationFrame(loop);
     };
