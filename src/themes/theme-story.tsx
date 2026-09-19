@@ -11,7 +11,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Download, Heart, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Mail, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { EASE, Magnetic, Reveal } from "@/lib/anim";
 import {
@@ -26,7 +26,6 @@ import {
   languages,
   interests,
   socials,
-  type Project,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import Particles from "@/components/Particles";
@@ -825,90 +824,195 @@ function SectionCraft() {
   );
 }
 
-function ProjectCard({
-  p,
-  flip = false,
-  ratio,
-}: {
-  p: Project;
-  flip?: boolean;
-  ratio: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [liked, setLiked] = useState(false);
+const FEATURED = [projects[0], projects[1], projects[2]];
+const BACK_COVERS = [projects[3], projects[4]];
+
+function WorkCollage() {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: wrapRef,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const backY = useTransform(scrollYProgress, [0, 1], [56, -56]);
+  const frontY = useTransform(scrollYProgress, [0, 1], [120, -120]);
+  const frontR = useTransform(scrollYProgress, [0, 1], [7, 1.5]);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const tiltX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), {
+    stiffness: 140,
+    damping: 16,
+  });
+  const tiltY = useSpring(useTransform(mx, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 140,
+    damping: 16,
+  });
+
   return (
-    <div ref={ref} className={cn("group", flip && "md:mt-28")}>
-      <BorderGlow
-        edgeSensitivity={30}
-        glowColor="40 80 80"
-        backgroundColor="#120F17"
-        borderRadius={28}
-        glowRadius={40}
-        glowIntensity={1.0}
-        coneSpread={25}
-        animated={false}
-        colors={["#c084fc", "#f472b6", "#38bdf8"]}
-        className="border border-white/10"
+    <div
+      ref={wrapRef}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mx.set((e.clientX - rect.left) / rect.width - 0.5);
+        my.set((e.clientY - rect.top) / rect.height - 0.5);
+      }}
+      onMouseLeave={() => {
+        mx.set(0);
+        my.set(0);
+      }}
+      className="relative mt-16"
+    >
+      <motion.div
+        style={{ y: backY }}
+        className="relative overflow-hidden rounded-[28px] bg-[#F6F1E5] text-ink shadow-[0_50px_140px_-50px_rgba(0,0,0,0.9)]"
       >
-        <Link href={`/projects/${p.id}`} className="block">
-          <div className="p-2">
-            <div className={cn("relative overflow-hidden rounded-[20px]", ratio)}>
-              <motion.img
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-70"
+          style={{
+            backgroundImage: "radial-gradient(rgba(24,24,20,0.16) 1px, transparent 1.5px)",
+            backgroundSize: "9px 9px",
+          }}
+        />
+        <div className="relative grid gap-10 p-7 pb-10 md:grid-cols-[1.05fr_0.95fr] md:p-12 md:pb-14">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full bg-night px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white">
+              <span className="h-1.5 w-1.5 rounded-full bg-volt" />
+              The Work
+            </span>
+            <h3 className="mt-6 font-serif text-5xl leading-[1.02] text-ink/85 md:text-7xl">
+              Selected
+              <br />
+              <span className="italic">stories</span>
+            </h3>
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-ink/50">
+              Tools of the trade
+            </p>
+            <div className="mt-3 flex items-center gap-2.5">
+              <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-white ring-1 ring-night/15">
+                <ToolMark name="Figma" />
+              </span>
+              {["Photoshop", "Illustrator"].map((t) => (
+                <span
+                  key={t}
+                  className="h-10 w-10 overflow-hidden rounded-lg ring-1 ring-night/15"
+                >
+                  <ToolMark name={t} />
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="relative hidden min-h-[300px] sm:block">
+            {BACK_COVERS.map((p, i) => (
+              <img
+                key={p.id}
                 src={p.cover}
-                alt={p.title}
+                alt=""
+                aria-hidden
                 referrerPolicy="no-referrer"
                 loading="lazy"
-                style={{ y }}
-                className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
+                className={cn(
+                  "absolute w-[64%] rounded-2xl border-4 border-white object-cover shadow-2xl",
+                  i === 0
+                    ? "right-10 top-0 rotate-[7deg]"
+                    : "right-0 top-20 -rotate-[5deg]"
+                )}
               />
-              <span className="absolute left-4 top-4 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-md">
-                {p.category}
-              </span>
-              <button
-                type="button"
-                aria-label={`Like ${p.title}`}
-                aria-pressed={liked}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setLiked((v) => !v);
-                }}
-                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-night/70 backdrop-blur-md transition-transform hover:scale-110 active:scale-95"
-              >
-                <Heart
-                  className={cn(
-                    "h-4 w-4 transition-colors",
-                    liked ? "fill-volt text-volt" : "text-white/70"
-                  )}
-                />
-              </button>
-            </div>
+            ))}
           </div>
-          <div className="flex items-center justify-between gap-4 px-5 pb-5 pt-3">
-            <div className="min-w-0">
-              <h3 className="truncate font-serif text-xl font-semibold leading-tight text-white">
-                {p.title}
-              </h3>
-              <p className="mt-1.5 font-mono text-[15px] tracking-[0.08em] text-white">
-                № {p.id}
-              </p>
-            </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white transition-transform duration-300 group-hover:scale-105">
-              <ArrowUpRight className="h-5 w-5 text-night" />
+        </div>
+        <div className="relative bg-night px-7 py-5 md:px-12">
+          <Ticker speed={42} fade={false} pauseOnHover={false} repeat={2}>
+            <span className="mx-8 font-serif text-2xl italic text-white/30">
+              Stories on Behance
+            </span>
+            <span className="font-mono text-[10px] tracking-[0.3em] text-volt">
+              №12
+            </span>
+            <span className="mx-8 font-serif text-2xl italic text-white/30">
+              Selected work
+            </span>
+            <span className="font-mono text-[10px] tracking-[0.3em] text-volt">
+              2019—26
+            </span>
+          </Ticker>
+          <a
+            href={socials[0].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group absolute -top-5 right-6 inline-flex items-center gap-2 rounded-full bg-night px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white shadow-xl ring-1 ring-white/25 transition-colors hover:bg-volt hover:text-night md:right-12"
+          >
+            12 stories on Behance
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        </div>
+      </motion.div>
+
+      <motion.div
+        style={{ y: frontY, rotate: frontR, rotateX: tiltX, rotateY: tiltY, transformPerspective: 1100 }}
+        className="relative z-10 mx-auto mt-8 w-full max-w-3xl md:-mt-24 md:ml-auto md:mr-0 md:w-[64%]"
+      >
+        <div className="rounded-[28px] border border-white/10 bg-[#EDE6D6] p-4 shadow-[0_50px_140px_-40px_rgba(0,0,0,0.9)] md:p-6">
+          <div className="grid grid-cols-3 gap-3 md:gap-4">
+            {FEATURED.map((p) => (
+              <Link
+                key={p.id}
+                href={`/projects/${p.id}`}
+                className="group block transition-transform duration-300 hover:-translate-y-1.5"
+              >
+                <span className="relative block overflow-hidden rounded-[16px] border-2 border-night/85 bg-night shadow-lg">
+                  <span className="block aspect-[3/4] overflow-hidden">
+                    <img
+                      src={p.cover}
+                      alt={p.title}
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </span>
+                  <span className="absolute left-2 top-2 rounded-full bg-[#A6DCE0] px-2.5 py-1 font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-night">
+                    {p.category}
+                  </span>
+                  <span className="absolute bottom-2 right-2.5 font-mono text-[9px] tracking-[0.14em] text-white/85">
+                    №{p.id}
+                  </span>
+                </span>
+                <span className="mt-2 block truncate font-serif text-sm text-ink/80">
+                  {p.title}
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-4 flex justify-center">
+            <span className="rounded-full bg-night px-5 py-2 font-mono text-[9px] uppercase tracking-[0.24em] text-white">
+              Featured № 01–03
             </span>
           </div>
-        </Link>
-      </BorderGlow>
+        </div>
+      </motion.div>
+
+      <div className="mt-14 overflow-hidden rounded-2xl border border-white/10">
+        {projects.map((p) => (
+          <Link
+            key={p.id}
+            href={`/projects/${p.id}`}
+            className="group flex items-center gap-4 border-b border-white/10 px-5 py-3.5 transition-colors last:border-0 hover:bg-white/[0.04]"
+          >
+            <span className="font-mono text-[10px] tracking-[0.2em] text-volt">
+              № {p.id}
+            </span>
+            <span className="min-w-0 flex-1 truncate font-serif text-lg text-white/85 transition-colors group-hover:text-white">
+              {p.title}
+            </span>
+            <span className="hidden font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 sm:block">
+              {p.category}
+            </span>
+            <ArrowUpRight className="h-4 w-4 shrink-0 text-white/35 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt" />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
-
-const RATIOS = ["aspect-[4/3]", "aspect-square", "aspect-[4/5]", "aspect-[4/3]"];
 
 function TitleMarquee() {
   return (
@@ -969,20 +1073,11 @@ function FeaturedWork() {
         </div>
         <Reveal delay={0.08} className="mt-9">
           <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-white/40">
-            Twelve pieces — hover the frames for the story, click to open.
+            Twelve stories — tilt the stack, tap a frame to open.
           </p>
         </Reveal>
         <TitleMarquee />
-        <div className="mt-16 grid gap-x-10 gap-y-20 md:grid-cols-2 md:gap-y-28">
-          {projects.map((p, i) => (
-            <ProjectCard
-              key={p.id}
-              p={p}
-              flip={i % 2 === 1}
-              ratio={RATIOS[i % RATIOS.length]}
-            />
-          ))}
-        </div>
+        <WorkCollage />
       </div>
     </section>
   );
