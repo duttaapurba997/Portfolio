@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -8,6 +7,7 @@ import type { Project } from "@/lib/data";
 import { EASE } from "@/lib/anim";
 import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
+import { useTopOnArrive } from "@/components/scroll-top";
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
@@ -23,25 +23,7 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
 
-  useEffect(() => {
-    const toTop = () => window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-    toTop();
-    let touched = false;
-    const onTouch = () => {
-      touched = true;
-    };
-    const onLoad = () => {
-      if (!touched) toTop();
-    };
-    window.addEventListener("wheel", onTouch, { passive: true });
-    window.addEventListener("touchmove", onTouch, { passive: true });
-    window.addEventListener("load", onLoad);
-    return () => {
-      window.removeEventListener("wheel", onTouch);
-      window.removeEventListener("touchmove", onTouch);
-      window.removeEventListener("load", onLoad);
-    };
-  }, []);
+  useTopOnArrive(project.id);
 
   return (
     <div className="relative min-h-screen bg-night font-sans text-white">
