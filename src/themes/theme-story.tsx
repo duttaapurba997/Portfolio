@@ -29,6 +29,7 @@ import {
   type Project,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { Dither } from "@/components/Dither";
 
 function WordReveal({
   text,
@@ -239,7 +240,7 @@ function HeroCollage({ d }: { d: number }) {
         style={{ y: yUp }}
         className="group relative w-[82%] -rotate-2 rounded-2xl border border-white/10 bg-nightscreen shadow-2xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-0"
       >
-        <a href={big.href} target="_blank" rel="noopener noreferrer" className="block">
+        <Link href={`/projects/${big.id}`} className="block">
           <div className="overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -261,14 +262,14 @@ function HeroCollage({ d }: { d: number }) {
               № {big.id}
             </span>
           </span>
-        </a>
+        </Link>
       </motion.div>
 
       <motion.div
         style={{ y: yDown }}
         className="group relative -mt-[24%] ml-auto w-[52%] rotate-3 rounded-2xl border border-white/10 bg-nightscreen shadow-xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-1"
       >
-        <a href={small.href} target="_blank" rel="noopener noreferrer" className="block">
+        <Link href={`/projects/${small.id}`} className="block">
           <div className="overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -282,7 +283,7 @@ function HeroCollage({ d }: { d: number }) {
           <span className="absolute bottom-3 left-3 rounded-full bg-volt px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-night">
             {small.category}
           </span>
-        </a>
+        </Link>
       </motion.div>
 
       <motion.span
@@ -304,8 +305,21 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night bg-grid-volt text-white"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-night bg-grid-volt text-white"
     >
+      <Dither
+        waveColor={[0.05, 0.3, 0.34]}
+        disableAnimation={false}
+        enableMouseInteraction={true}
+        mouseRadius={0.25}
+        colorNum={26}
+        waveAmplitude={0.06}
+        waveFrequency={4}
+        waveSpeed={0.04}
+        backgroundColor={[0.03, 0.03, 0.04]}
+        className="-z-10 opacity-30"
+      />
+      <div className="pointer-events-none absolute inset-0 -z-[9] bg-gradient-to-b from-transparent via-transparent to-night/60" />
       <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-16 px-6 pb-16 pt-32 md:px-10 lg:grid-cols-[1.15fr_0.9fr] lg:gap-8 lg:pt-40">
         <div>
           <motion.p
@@ -754,12 +768,7 @@ function ProjectCard({
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
   return (
     <div ref={ref} className={cn("group", flip && "md:mt-28")}>
-      <Link
-        href={p.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block"
-      >
+      <Link href={`/projects/${p.id}`} className="block">
         <div
           className={cn(
             "relative overflow-hidden rounded-2xl border border-ink/10 bg-paperdeep",
@@ -785,7 +794,7 @@ function ProjectCard({
               {p.blurb}
             </span>
             <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-volt">
-              Open on Behance
+              Open the story
               <ArrowUpRight className="h-3 w-3" />
             </span>
           </span>

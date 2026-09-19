@@ -4,15 +4,18 @@ An aesthetic portfolio for **Apurba Dutta (Eden)**, Senior Graphic Designer at
 Swiggy. Built with **Next.js 16, React 19, TypeScript, Tailwind CSS v4, Framer
 Motion** and **shadcn/ui**.
 
-The site ships with **three design directions**, each on its own route so you
-can open them side by side (or with cmd/ctrl + click) and compare them
-"altogether". A tiny "Looks" pill in the bottom corner links between all three.
+The site ships with **three design directions plus a design-system docs
+page**, each on its own route so you can open them side by side (or with
+cmd/ctrl + click) and compare them "altogether". A tiny "Looks" pill in the
+bottom corner links between them.
 
 | Route | Look | Vibe |
 | --- | --- | --- |
 | `/` | **Story** | Preloader → volt-on-night hero, chaptered narrative (Designer → Craft → Work → Road → Epilogue), parallax Behance cards, paper/dark section rhythm |
 | `/dark` | **Dark Gallery** | Near-black canvas, electric volt accent, cinematic hover grid, scroll progress |
 | `/concept` | **Concept Spec** | Monochrome "designer spec sheet" with stamps, checkboxes, ledger-style work log |
+| `/design-system` | **Design System** | Geist-style docs: principles, color, typography, grid & materials, component library, tokens |
+| `/projects/[id]` | **Project stories** | 12 interactive pages (01–12) with animated Dither background; full case opens on Behance |
 
 All three render the same real content from `src/lib/data.ts`, so switching
 themes never splits your content.

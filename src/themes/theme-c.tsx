@@ -268,10 +268,8 @@ const CATS = ["all", "ui/ux", "branding", "campaign", "packaging", "social · ad
 
 function LedgerRow({ p }: { p: Project }) {
   return (
-    <a
-      href={p.href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/projects/${p.id}`}
       className="group grid grid-cols-[2.6rem_1fr_auto] items-center gap-3 border-b border-specink/15 px-2 py-3 transition-colors hover:bg-specink hover:text-spec"
     >
       <span className="font-mono text-[10px] text-specink/45 group-hover:text-spec/60">
@@ -289,7 +287,7 @@ function LedgerRow({ p }: { p: Project }) {
         {p.category}
       </span>
       <ArrowUpRight className="h-4 w-4 text-specink/40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-spec" />
-    </a>
+    </Link>
   );
 }
 

@@ -8,6 +8,7 @@ const LOOKS = [
   { href: "/", label: "Story" },
   { href: "/dark", label: "Dark" },
   { href: "/concept", label: "Concept" },
+  { href: "/design-system", label: "System" },
 ];
 
 export function LookNav() {

@@ -226,9 +226,7 @@ function Work() {
         {projects.map((p, i) => (
           <StaggerItem key={p.id}>
             <Link
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/projects/${p.id}`}
               className="group block"
             >
               <motion.div
