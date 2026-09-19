@@ -1153,6 +1153,10 @@ function Footer() {
 }
 
 export function ThemeStory() {
+  useEffect(() => {
+    if (!window.location.hash) window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-night font-sans">
       <ScrollProgress />
