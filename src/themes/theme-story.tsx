@@ -829,7 +829,13 @@ function ProjectCard({
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
   return (
-    <div ref={ref} className={cn("group", flip && "md:mt-28")}>
+    <div
+      ref={ref}
+      className={cn(
+        "group shadow-[0_0_90px_-28px_rgba(192,132,252,0.35)] transition-shadow duration-500 hover:shadow-[0_0_110px_-20px_rgba(244,114,182,0.45)]",
+        flip && "md:mt-28"
+      )}
+    >
       <BorderGlow
         edgeSensitivity={42}
         glowColor="40 80 80"
@@ -840,7 +846,7 @@ function ProjectCard({
         coneSpread={23}
         animated
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
-        className="border border-neutral-900"
+        className="border border-white/10"
       >
         <Link href={`/projects/${p.id}`} className="block">
           <div className={cn("relative overflow-hidden", ratio)}>
