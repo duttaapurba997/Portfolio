@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -21,6 +22,10 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   const index = projects.findIndex((p) => p.id === project.id);
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-night font-sans text-white">

@@ -307,13 +307,16 @@ function HeroCollage({ d }: { d: number }) {
       </motion.div>
       </motion.div>
 
-      <motion.span
+      <motion.a
+        href={socials[0].href}
+        target="_blank"
+        rel="noopener noreferrer"
         animate={reduce ? undefined : { y: [0, -8, 0], rotate: [-3, -1.5, -3] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -left-3 top-[58%] rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm"
+        className="absolute -left-3 top-[58%] rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-volt hover:text-volt"
       >
         12 stories on Behance
-      </motion.span>
+      </motion.a>
 
       <span className="absolute -left-10 top-1/2 hidden -translate-y-1/2 -rotate-90 font-mono text-[9px] uppercase tracking-[0.34em] text-white/35 lg:block">
         Scroll to begin
