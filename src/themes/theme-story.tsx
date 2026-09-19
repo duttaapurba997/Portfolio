@@ -5,6 +5,7 @@ import {
   AnimatePresence,
   motion,
   useAnimationFrame,
+  useMotionTemplate,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -210,6 +211,7 @@ function Nav() {
 
 function HeroCollage({ d }: { d: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -217,8 +219,30 @@ function HeroCollage({ d }: { d: number }) {
   const yUp = useTransform(scrollYProgress, [0, 1], [60, -50]);
   const yDown = useTransform(scrollYProgress, [0, 1], [-30, 70]);
 
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 120, damping: 16, mass: 0.4 });
+  const sy = useSpring(my, { stiffness: 120, damping: 16, mass: 0.4 });
+  const rotateX = useTransform(sy, [-0.5, 0.5], [9, -9]);
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-11, 11]);
+  const glareX = useTransform(sx, [-0.5, 0.5], [15, 85]);
+  const glareY = useTransform(sy, [-0.5, 0.5], [15, 85]);
+  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.20), transparent 62%)`;
+  const smallX = useTransform(sx, [-0.5, 0.5], [22, -22]);
+  const smallY = useTransform(sy, [-0.5, 0.5], [16, -16]);
+
   const big = projects[1];
   const small = projects[8];
+
+  const onMove = (e: { clientX: number; clientY: number; currentTarget: HTMLDivElement }) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - rect.left) / rect.width - 0.5);
+    my.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const onLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
 
   return (
     <motion.div
@@ -226,7 +250,9 @@ function HeroCollage({ d }: { d: number }) {
       initial={{ opacity: 0, y: 44 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, delay: d + 0.45, ease: EASE }}
-      className="relative mx-auto w-full max-w-md lg:max-w-lg"
+      onMouseMove={reduce ? undefined : onMove}
+      onMouseLeave={reduce ? undefined : onLeave}
+      className="relative mx-auto w-full max-w-md [perspective:1400px] lg:max-w-lg"
     >
       <span
         aria-hidden
@@ -238,8 +264,8 @@ function HeroCollage({ d }: { d: number }) {
       />
 
       <motion.div
-        style={{ y: yUp }}
-        className="group relative w-[82%] -rotate-2 rounded-2xl shadow-2xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-0"
+        style={reduce ? { y: yUp } : { y: yUp, rotateX, rotateY }}
+        className="group relative w-[82%] -rotate-2 shadow-2xl shadow-black/50 [transform-style:preserve-3d]"
       >
         <BorderGlow
           edgeSensitivity={42}
@@ -262,58 +288,78 @@ function HeroCollage({ d }: { d: number }) {
               className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
             />
           </div>
-          <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-volt" />
-            {big.category}
-          </span>
-          <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-night/95 via-night/40 to-transparent px-5 pb-4 pt-16">
-            <span className="font-serif text-base italic text-white/95 md:text-lg">
-              {big.title}
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50">
-              № {big.id}
-            </span>
-          </span>
         </Link>
         </BorderGlow>
+        <motion.span
+          aria-hidden
+          style={{ background: glare, transform: "translateZ(70px)" }}
+          className="pointer-events-none absolute inset-0 rounded-2xl"
+        />
+        <span
+          style={{ transform: "translateZ(70px)" }}
+          className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-volt" />
+          {big.category}
+        </span>
+        <span
+          style={{ transform: "translateZ(50px)" }}
+          className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-night/95 via-night/40 to-transparent px-5 pb-4 pt-16"
+        >
+          <span className="font-serif text-base italic text-white/95 md:text-lg">
+            {big.title}
+          </span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50">
+            № {big.id}
+          </span>
+        </span>
       </motion.div>
 
       <motion.div
         style={{ y: yDown }}
-        className="group relative -mt-[24%] ml-auto w-[52%] rotate-3 rounded-2xl shadow-xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-1"
+        className="relative -mt-[24%] ml-auto w-[52%]"
       >
-        <BorderGlow
-          edgeSensitivity={42}
-          glowColor="40 80 80"
-          backgroundColor="#121216"
-          borderRadius={16}
-          glowRadius={48}
-          glowIntensity={0.8}
-          coneSpread={23}
-          animated
-          colors={["#c084fc", "#f472b6", "#38bdf8"]}
+      <motion.div style={reduce ? {} : { x: smallX, y: smallY }}>
+        <motion.div
+          animate={reduce ? undefined : { y: [0, -12, 0], rotate: [3, 1.5, 3] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="group relative rounded-2xl shadow-xl shadow-black/50"
         >
-          <Link href={`/projects/${small.id}`} className="block">
-          <div className="overflow-hidden rounded-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={small.cover}
-              alt={small.title}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-            />
-          </div>
-          <span className="absolute bottom-3 left-3 rounded-full bg-volt px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-night">
-            {small.category}
-          </span>
-        </Link>
-        </BorderGlow>
+          <BorderGlow
+            edgeSensitivity={42}
+            glowColor="40 80 80"
+            backgroundColor="#121216"
+            borderRadius={16}
+            glowRadius={48}
+            glowIntensity={0.8}
+            coneSpread={23}
+            animated
+            colors={["#c084fc", "#f472b6", "#38bdf8"]}
+          >
+            <Link href={`/projects/${small.id}`} className="block">
+            <div className="overflow-hidden rounded-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={small.cover}
+                alt={small.title}
+                referrerPolicy="no-referrer"
+                loading="lazy"
+                className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+              />
+            </div>
+            <span className="absolute bottom-3 left-3 rounded-full bg-volt px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-night">
+              {small.category}
+            </span>
+          </Link>
+          </BorderGlow>
+        </motion.div>
+      </motion.div>
       </motion.div>
 
       <motion.span
-        style={{ y: yUp }}
-        className="absolute -left-3 top-[58%] -rotate-3 rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm"
+        animate={reduce ? undefined : { y: [0, -8, 0], rotate: [-3, -1.5, -3] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -left-3 top-[58%] rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm"
       >
         12 stories on Behance
       </motion.span>
