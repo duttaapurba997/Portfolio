@@ -678,6 +678,39 @@ function SectionDesigner() {
   );
 }
 
+function ToolMark({ name }: { name: string }) {
+  if (name === "Figma") {
+    return (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#F24E1E" role="img" aria-label="Figma">
+        <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z" />
+      </svg>
+    );
+  }
+  if (name === "Framer") {
+    return (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#0055FF" role="img" aria-label="Framer">
+        <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
+      </svg>
+    );
+  }
+  const tiles: Record<string, [string, string, string]> = {
+    Photoshop: ["#001E36", "#31A8FF", "Ps"],
+    Illustrator: ["#330000", "#FF9A00", "Ai"],
+    InDesign: ["#49021F", "#FF3366", "Id"],
+  };
+  const [bg, fg, mono] = tiles[name] ?? ["#141414", "#FFFFFF", name.slice(0, 2)];
+  return (
+    <span
+      role="img"
+      aria-label={name}
+      className="flex h-full w-full items-center justify-center font-sans text-[13px] font-bold tracking-tight"
+      style={{ backgroundColor: bg, color: fg }}
+    >
+      {mono}
+    </span>
+  );
+}
+
 function SectionCraft() {
   return (
     <section id="craft" className="relative bg-night bg-grid-volt text-white">
@@ -739,10 +772,14 @@ function SectionCraft() {
             {tools.map((t) => (
               <span
                 key={t}
-                className="mx-6 flex items-center gap-12 font-serif text-2xl italic text-white/30"
+                className="mx-3 inline-flex shrink-0 items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] py-2 pl-2 pr-6"
               >
-                {t}
-                <Sparkles className="h-3 w-3 text-volt" />
+                <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/[0.06]">
+                  <ToolMark name={t} />
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/85">
+                  {t}
+                </span>
               </span>
             ))}
           </Ticker>
@@ -822,15 +859,15 @@ const RATIOS = ["aspect-[4/3]", "aspect-square", "aspect-[4/5]", "aspect-[4/3]"]
 
 function TitleMarquee() {
   return (
-    <div className="relative overflow-hidden border-y border-ink/10 bg-paperdeep/60 py-3.5">
+    <div className="relative overflow-hidden border-y border-white/10 bg-nightscreen/60 py-3.5">
       <Ticker speed={70}>
         {projects.map((p) => (
           <span
             key={p.id}
-            className="mx-6 flex items-center gap-5 font-serif text-xl italic text-ink/65 md:text-2xl"
+            className="mx-6 flex items-center gap-5 font-serif text-xl italic text-white/65 md:text-2xl"
           >
             {p.title}
-            <span className="font-mono text-[10px] not-italic tracking-[0.2em] text-ember">
+            <span className="font-mono text-[10px] not-italic tracking-[0.2em] text-volt">
               №{p.id}
             </span>
           </span>
@@ -842,23 +879,23 @@ function TitleMarquee() {
 
 function FeaturedWork() {
   return (
-    <section id="work" className="relative overflow-hidden bg-paper text-ink">
+    <section id="work" className="relative overflow-hidden bg-night bg-grid-volt text-white">
       <span
         aria-hidden
-        className="pointer-events-none absolute right-0 top-32 select-none font-serif text-[15rem] italic leading-none text-stroke text-ink/10"
+        className="pointer-events-none absolute right-0 top-32 select-none font-serif text-[15rem] italic leading-none text-stroke text-volt/15"
       >
         03
       </span>
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
-        <ChapterHead kicker="Chapter 03 — The Work" />
+        <ChapterHead kicker="Chapter 03 — The Work" dark />
         <div className="mt-14 flex flex-wrap items-end justify-between gap-6">
-          <StoryTitle text="The proof, framed." accentWords={["framed."]} />
+          <StoryTitle text="The proof, framed." accentWords={["framed."]} dark />
           <Reveal className="pb-3">
             <a
               href={socials[0].href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/60 transition-colors hover:text-ember"
+              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/60 transition-colors hover:text-volt"
             >
               Full archive on Behance
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -866,7 +903,7 @@ function FeaturedWork() {
           </Reveal>
         </div>
         <Reveal delay={0.08} className="mt-9">
-          <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-ink/40">
+          <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-white/40">
             Twelve pieces — hover the frames for the story, click to open.
           </p>
         </Reveal>
@@ -1042,14 +1079,6 @@ function Epilogue() {
 function Footer() {
   return (
     <footer className="bg-night">
-      <div className="overflow-hidden bg-volt py-3 text-night">
-        <Ticker speed={95} repeat={6}>
-          <span className="flex items-center gap-10 px-6 font-mono text-[11px] uppercase tracking-[0.26em]">
-            Thanks for reading
-            <Sparkles className="h-3 w-3" />
-          </span>
-        </Ticker>
-      </div>
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-10 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45 md:px-10">
         <span>© 2026 Apurba Dutta — designed with obsession</span>
         <a

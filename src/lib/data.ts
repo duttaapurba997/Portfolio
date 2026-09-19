@@ -277,7 +277,6 @@ export const skillGroups = [
       "Adobe Photoshop",
       "Adobe Illustrator",
       "Adobe InDesign",
-      "Adobe Premiere Pro",
       "Framer",
     ],
   },
@@ -288,7 +287,6 @@ export const tools = [
   "Photoshop",
   "Illustrator",
   "InDesign",
-  "Premiere Pro",
   "Framer",
 ];
 
