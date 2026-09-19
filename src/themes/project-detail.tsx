@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Project } from "@/lib/data";
 import { EASE } from "@/lib/anim";
-import { Dither } from "@/components/Dither";
+import { LiquidEther } from "@/components/LiquidEther";
 import { BorderGlow } from "@/components/BorderGlow";
 
 function Meta({ label, value }: { label: string; value: string }) {
@@ -25,15 +25,25 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   return (
     <div className="relative min-h-screen bg-night font-sans text-white">
       <div className="absolute inset-0">
-        <Dither
-          waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
-          disableAnimation={false}
-          enableMouseInteraction={true}
-          mouseRadius={0.2}
-          colorNum={9}
-          waveAmplitude={0.25}
-          waveFrequency={3}
-          waveSpeed={0.04}
+        <LiquidEther
+          colors={["#5227FF", "#FF9FFC", "#B497CF"]}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+          color0="#216c94"
+          color1="#7aa6a6"
+          color2="#2b9993"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-transparent to-night" />
       </div>

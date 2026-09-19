@@ -11,7 +11,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Download, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Heart, Mail, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { EASE, Magnetic, Reveal } from "@/lib/anim";
 import {
@@ -29,7 +29,7 @@ import {
   type Project,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Dither } from "@/components/Dither";
+import { LiquidEther } from "@/components/LiquidEther";
 import { BorderGlow } from "@/components/BorderGlow";
 
 function WordReveal({
@@ -332,15 +332,25 @@ function Hero() {
       id="top"
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-night bg-grid-volt text-white"
     >
-      <Dither
-        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
-        disableAnimation={false}
-        enableMouseInteraction={true}
-        mouseRadius={0.2}
-        colorNum={9}
-        waveAmplitude={0.25}
-        waveFrequency={3}
-        waveSpeed={0.04}
+      <LiquidEther
+        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
+        mouseForce={20}
+        cursorSize={100}
+        isViscous={false}
+        viscous={30}
+        iterationsViscous={32}
+        iterationsPoisson={32}
+        resolution={0.5}
+        isBounce={false}
+        autoDemo={true}
+        autoSpeed={0.5}
+        autoIntensity={2.2}
+        takeoverDuration={0.25}
+        autoResumeDelay={3000}
+        autoRampDuration={0.6}
+        color0="#216c94"
+        color1="#7aa6a6"
+        color2="#2b9993"
         className="-z-10 opacity-30"
       />
       <div className="pointer-events-none absolute inset-0 -z-[9] bg-gradient-to-b from-transparent via-transparent to-night/60" />
@@ -737,15 +747,25 @@ function ToolMark({ name }: { name: string }) {
 function SectionCraft() {
   return (
     <section id="craft" className="relative isolate bg-night bg-grid-volt text-white">
-      <Dither
-        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
-        disableAnimation={false}
-        enableMouseInteraction={true}
-        mouseRadius={0.2}
-        colorNum={9}
-        waveAmplitude={0.25}
-        waveFrequency={3}
-        waveSpeed={0.04}
+      <LiquidEther
+        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
+        mouseForce={20}
+        cursorSize={100}
+        isViscous={false}
+        viscous={30}
+        iterationsViscous={32}
+        iterationsPoisson={32}
+        resolution={0.5}
+        isBounce={false}
+        autoDemo={true}
+        autoSpeed={0.5}
+        autoIntensity={2.2}
+        takeoverDuration={0.25}
+        autoResumeDelay={3000}
+        autoRampDuration={0.6}
+        color0="#216c94"
+        color1="#7aa6a6"
+        color2="#2b9993"
         className="-z-10 opacity-25"
       />
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
@@ -833,6 +853,7 @@ function ProjectCard({
   ratio: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [liked, setLiked] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -841,41 +862,63 @@ function ProjectCard({
   return (
     <div ref={ref} className={cn("group", flip && "md:mt-28")}>
       <BorderGlow
-        edgeSensitivity={14}
+        edgeSensitivity={30}
         glowColor="40 80 80"
         backgroundColor="#120F17"
-        borderRadius={22}
-        glowRadius={59}
-        glowIntensity={0.6}
-        coneSpread={20}
+        borderRadius={28}
+        glowRadius={40}
+        glowIntensity={1.0}
+        coneSpread={25}
         animated={false}
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
         className="border border-white/10"
       >
         <Link href={`/projects/${p.id}`} className="block">
-          <div className={cn("relative overflow-hidden", ratio)}>
-            <motion.img
-              src={p.cover}
-              alt={p.title}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              style={{ y }}
-              className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
-            />
-            <span className="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm">
-              {p.category}
-            </span>
+          <div className="p-2">
+            <div className={cn("relative overflow-hidden rounded-[20px]", ratio)}>
+              <motion.img
+                src={p.cover}
+                alt={p.title}
+                referrerPolicy="no-referrer"
+                loading="lazy"
+                style={{ y }}
+                className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
+              />
+              <span className="absolute left-4 top-4 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-md">
+                {p.category}
+              </span>
+              <button
+                type="button"
+                aria-label={`Like ${p.title}`}
+                aria-pressed={liked}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setLiked((v) => !v);
+                }}
+                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-night/70 backdrop-blur-md transition-transform hover:scale-110 active:scale-95"
+              >
+                <Heart
+                  className={cn(
+                    "h-4 w-4 transition-colors",
+                    liked ? "fill-volt text-volt" : "text-white/70"
+                  )}
+                />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center justify-between gap-4 px-5 py-4">
+          <div className="flex items-center justify-between gap-4 px-5 pb-5 pt-3">
             <div className="min-w-0">
-              <h3 className="truncate font-serif text-xl leading-tight text-white transition-colors group-hover:text-volt">
+              <h3 className="truncate font-serif text-xl font-semibold leading-tight text-white">
                 {p.title}
               </h3>
-              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
+              <p className="mt-1.5 font-mono text-[15px] tracking-[0.08em] text-white">
                 № {p.id}
               </p>
             </div>
-            <ArrowUpRight className="h-5 w-5 shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt" />
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white transition-transform duration-300 group-hover:scale-105">
+              <ArrowUpRight className="h-5 w-5 text-night" />
+            </span>
           </div>
         </Link>
       </BorderGlow>
@@ -908,15 +951,25 @@ function TitleMarquee() {
 function FeaturedWork() {
   return (
     <section id="work" className="relative isolate overflow-hidden bg-night bg-grid-volt text-white">
-      <Dither
-        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
-        disableAnimation={false}
-        enableMouseInteraction={true}
-        mouseRadius={0.2}
-        colorNum={9}
-        waveAmplitude={0.25}
-        waveFrequency={3}
-        waveSpeed={0.04}
+      <LiquidEther
+        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
+        mouseForce={20}
+        cursorSize={100}
+        isViscous={false}
+        viscous={30}
+        iterationsViscous={32}
+        iterationsPoisson={32}
+        resolution={0.5}
+        isBounce={false}
+        autoDemo={true}
+        autoSpeed={0.5}
+        autoIntensity={2.2}
+        takeoverDuration={0.25}
+        autoResumeDelay={3000}
+        autoRampDuration={0.6}
+        color0="#216c94"
+        color1="#7aa6a6"
+        color2="#2b9993"
         className="-z-10 opacity-25"
       />
       <span
@@ -965,15 +1018,25 @@ function FeaturedWork() {
 function SectionRoad() {
   return (
     <section id="road" className="relative isolate bg-night bg-grid-volt text-white">
-      <Dither
-        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
-        disableAnimation={false}
-        enableMouseInteraction={true}
-        mouseRadius={0.2}
-        colorNum={9}
-        waveAmplitude={0.25}
-        waveFrequency={3}
-        waveSpeed={0.04}
+      <LiquidEther
+        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
+        mouseForce={20}
+        cursorSize={100}
+        isViscous={false}
+        viscous={30}
+        iterationsViscous={32}
+        iterationsPoisson={32}
+        resolution={0.5}
+        isBounce={false}
+        autoDemo={true}
+        autoSpeed={0.5}
+        autoIntensity={2.2}
+        takeoverDuration={0.25}
+        autoResumeDelay={3000}
+        autoRampDuration={0.6}
+        color0="#216c94"
+        color1="#7aa6a6"
+        color2="#2b9993"
         className="-z-10 opacity-25"
       />
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
