@@ -2,7 +2,6 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import {
-  AnimatePresence,
   motion,
   useAnimationFrame,
   useMotionTemplate,
@@ -115,54 +114,6 @@ function QrMark({ className = "" }: { className?: string }) {
   );
 }
 
-function Preloader() {
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setDone(true), 2000);
-    return () => clearTimeout(t);
-  }, []);
-  return (
-    <AnimatePresence>
-      {!done && (
-        <motion.div
-          key="preloader"
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="fixed inset-0 z-[100] flex flex-col justify-between bg-night px-6 py-6 md:px-12"
-        >
-          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-white/40">
-            <span className="flex items-center gap-2">
-              <QrMark className="text-volt" /> Eden &mdash; est. 2019
-            </span>
-            <span>Bengaluru, India</span>
-          </div>
-          <div className="mx-auto max-w-3xl">
-            <p className="font-serif text-lg italic text-white/60">Once upon a grid,</p>
-            <p className="mt-2 font-serif text-4xl leading-tight tracking-tight text-white md:text-6xl">
-              a designer decided{" "}
-              <span className="font-serif italic text-volt">stories</span> come
-              first.
-            </p>
-          </div>
-          <div>
-            <div className="h-[3px] w-full overflow-hidden bg-white/10">
-              <motion.div
-                className="h-full bg-volt"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1.6, ease: [0.65, 0, 0.35, 1] }}
-              />
-            </div>
-            <p className="mt-3 text-right font-mono text-[9px] uppercase tracking-[0.24em] text-white/40">
-              A. Dutta
-            </p>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -175,7 +126,7 @@ function Nav() {
     <motion.header
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay: 2.15, ease: EASE }}
+      transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
       className={`fixed inset-x-0 top-0 z-[80] transition-colors duration-300 ${
         scrolled ? "border-b border-white/10 bg-night/75 backdrop-blur-md" : "bg-transparent"
       }`}
@@ -372,7 +323,7 @@ function HeroCollage({ d }: { d: number }) {
 }
 
 function Hero() {
-  const d = 2.15;
+  const d = 0.15;
   return (
     <section
       id="top"
@@ -893,20 +844,28 @@ function ProjectCard({
               style={{ y }}
               className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
             />
-            <span className="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm">
+            <span className="absolute left-4 top-4 hidden rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm md:inline-flex">
               {p.category}
             </span>
           </div>
-          <div className="flex items-center justify-between gap-4 px-5 py-4">
+          <div className="px-5 py-4 md:flex md:items-center md:justify-between md:gap-4">
             <div className="min-w-0">
-              <h3 className="truncate font-serif text-xl leading-tight text-white transition-colors group-hover:text-volt">
-                {p.title}
-              </h3>
-              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-sans text-[26px] font-extrabold uppercase leading-[1.08] tracking-tight text-white md:truncate md:font-serif md:text-xl md:font-normal md:normal-case md:leading-tight md:tracking-normal md:transition-colors md:group-hover:text-volt">
+                  {p.title}
+                </h3>
+                <span className="mt-1 shrink-0 rounded-full border border-white/20 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70 md:hidden">
+                  {p.category}
+                </span>
+              </div>
+              <p className="mt-3 text-[17px] leading-relaxed text-white/55 md:hidden">
+                {p.blurb}
+              </p>
+              <p className="mt-1 hidden font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 md:block">
                 № {p.id}
               </p>
             </div>
-            <ArrowUpRight className="h-5 w-5 shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt" />
+            <ArrowUpRight className="hidden h-5 w-5 shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt md:block" />
           </div>
         </Link>
       </BorderGlow>
@@ -1193,7 +1152,6 @@ function Footer() {
 export function ThemeStory() {
   return (
     <div className="min-h-screen bg-night font-sans">
-      <Preloader />
       <ScrollProgress />
       <Nav />
       <main>
