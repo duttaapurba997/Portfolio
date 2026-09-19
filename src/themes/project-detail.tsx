@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Project } from "@/lib/data";
 import { EASE } from "@/lib/anim";
-import { LiquidEther } from "@/components/LiquidEther";
+import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
 
 function Meta({ label, value }: { label: string; value: string }) {
@@ -25,25 +25,15 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   return (
     <div className="relative min-h-screen bg-night font-sans text-white">
       <div className="absolute inset-0">
-        <LiquidEther
-          colors={["#5227FF", "#FF9FFC", "#B497CF"]}
-          mouseForce={20}
-          cursorSize={100}
-          isViscous={false}
-          viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.5}
-          isBounce={false}
-          autoDemo={true}
-          autoSpeed={0.5}
-          autoIntensity={2.2}
-          takeoverDuration={0.25}
-          autoResumeDelay={3000}
-          autoRampDuration={0.6}
-          color0="#216c94"
-          color1="#7aa6a6"
-          color2="#2b9993"
+        <Particles
+          particleColors={["#518686"]}
+          particleCount={300}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-transparent to-night" />
       </div>

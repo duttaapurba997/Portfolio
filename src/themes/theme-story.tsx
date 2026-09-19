@@ -29,7 +29,7 @@ import {
   type Project,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { LiquidEther } from "@/components/LiquidEther";
+import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
 
 function WordReveal({
@@ -332,27 +332,18 @@ function Hero() {
       id="top"
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-night text-white"
     >
-      <LiquidEther
-        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
-        mouseForce={20}
-        cursorSize={100}
-        isViscous={false}
-        viscous={30}
-        iterationsViscous={32}
-        iterationsPoisson={32}
-        resolution={0.5}
-        isBounce={false}
-        autoDemo={true}
-        autoSpeed={0.5}
-        autoIntensity={2.2}
-        takeoverDuration={0.25}
-        autoResumeDelay={3000}
-        autoRampDuration={0.6}
-        color0="#216c94"
-        color1="#7aa6a6"
-        color2="#2b9993"
-        className="-z-10 opacity-30"
-      />
+      <div className="absolute inset-0 -z-10 opacity-30">
+        <Particles
+          particleColors={["#518686"]}
+          particleCount={300}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
       <div className="pointer-events-none absolute inset-0 -z-[9] bg-gradient-to-b from-transparent via-transparent to-night/60" />
       <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-16 px-6 pb-16 pt-32 md:px-10 lg:grid-cols-[1.15fr_0.9fr] lg:gap-8 lg:pt-40">
         <div>
@@ -747,27 +738,18 @@ function ToolMark({ name }: { name: string }) {
 function SectionCraft() {
   return (
     <section id="craft" className="relative isolate bg-night text-white">
-      <LiquidEther
-        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
-        mouseForce={20}
-        cursorSize={100}
-        isViscous={false}
-        viscous={30}
-        iterationsViscous={32}
-        iterationsPoisson={32}
-        resolution={0.5}
-        isBounce={false}
-        autoDemo={true}
-        autoSpeed={0.5}
-        autoIntensity={2.2}
-        takeoverDuration={0.25}
-        autoResumeDelay={3000}
-        autoRampDuration={0.6}
-        color0="#216c94"
-        color1="#7aa6a6"
-        color2="#2b9993"
-        className="-z-10 opacity-25"
-      />
+      <div className="absolute inset-0 -z-10 opacity-25">
+        <Particles
+          particleColors={["#518686"]}
+          particleCount={300}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 02 — The Craft" dark />
         <div className="mt-16 grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
@@ -951,27 +933,18 @@ function TitleMarquee() {
 function FeaturedWork() {
   return (
     <section id="work" className="relative isolate overflow-hidden bg-night text-white">
-      <LiquidEther
-        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
-        mouseForce={20}
-        cursorSize={100}
-        isViscous={false}
-        viscous={30}
-        iterationsViscous={32}
-        iterationsPoisson={32}
-        resolution={0.5}
-        isBounce={false}
-        autoDemo={true}
-        autoSpeed={0.5}
-        autoIntensity={2.2}
-        takeoverDuration={0.25}
-        autoResumeDelay={3000}
-        autoRampDuration={0.6}
-        color0="#216c94"
-        color1="#7aa6a6"
-        color2="#2b9993"
-        className="-z-10 opacity-25"
-      />
+      <div className="absolute inset-0 -z-10 opacity-25">
+        <Particles
+          particleColors={["#518686"]}
+          particleCount={300}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
       <span
         aria-hidden
         className="pointer-events-none absolute right-0 top-32 select-none font-serif text-[15rem] italic leading-none text-stroke text-volt/15"
@@ -1018,27 +991,18 @@ function FeaturedWork() {
 function SectionRoad() {
   return (
     <section id="road" className="relative isolate bg-night text-white">
-      <LiquidEther
-        colors={["#5227FF", "#FF9FFC", "#B497CF"]}
-        mouseForce={20}
-        cursorSize={100}
-        isViscous={false}
-        viscous={30}
-        iterationsViscous={32}
-        iterationsPoisson={32}
-        resolution={0.5}
-        isBounce={false}
-        autoDemo={true}
-        autoSpeed={0.5}
-        autoIntensity={2.2}
-        takeoverDuration={0.25}
-        autoResumeDelay={3000}
-        autoRampDuration={0.6}
-        color0="#216c94"
-        color1="#7aa6a6"
-        color2="#2b9993"
-        className="-z-10 opacity-25"
-      />
+      <div className="absolute inset-0 -z-10 opacity-25">
+        <Particles
+          particleColors={["#518686"]}
+          particleCount={300}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 04 — The Road" dark />
         <div className="mt-14">
