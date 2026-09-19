@@ -31,7 +31,6 @@ import {
 import { cn } from "@/lib/utils";
 import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
-import { useTopOnArrive } from "@/components/scroll-top";
 
 function WordReveal({
   text,
@@ -1154,8 +1153,6 @@ function Footer() {
 }
 
 export function ThemeStory() {
-  useTopOnArrive("home");
-
   return (
     <div className="min-h-screen bg-night font-sans">
       <ScrollProgress />

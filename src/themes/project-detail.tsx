@@ -7,7 +7,6 @@ import type { Project } from "@/lib/data";
 import { EASE } from "@/lib/anim";
 import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
-import { useTopOnArrive } from "@/components/scroll-top";
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
@@ -22,8 +21,6 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   const index = projects.findIndex((p) => p.id === project.id);
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
-
-  useTopOnArrive(project.id);
 
   return (
     <div className="relative min-h-screen bg-night font-sans text-white">
