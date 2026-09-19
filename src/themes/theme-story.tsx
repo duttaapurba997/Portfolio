@@ -239,9 +239,20 @@ function HeroCollage({ d }: { d: number }) {
 
       <motion.div
         style={{ y: yUp }}
-        className="group relative w-[82%] -rotate-2 rounded-2xl border border-white/10 bg-nightscreen shadow-2xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-0"
+        className="group relative w-[82%] -rotate-2 rounded-2xl shadow-2xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-0"
       >
-        <Link href={`/projects/${big.id}`} className="block">
+        <BorderGlow
+          edgeSensitivity={42}
+          glowColor="40 80 80"
+          backgroundColor="#121216"
+          borderRadius={16}
+          glowRadius={48}
+          glowIntensity={0.8}
+          coneSpread={23}
+          animated
+          colors={["#c084fc", "#f472b6", "#38bdf8"]}
+        >
+          <Link href={`/projects/${big.id}`} className="block">
           <div className="overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -264,13 +275,25 @@ function HeroCollage({ d }: { d: number }) {
             </span>
           </span>
         </Link>
+        </BorderGlow>
       </motion.div>
 
       <motion.div
         style={{ y: yDown }}
-        className="group relative -mt-[24%] ml-auto w-[52%] rotate-3 rounded-2xl border border-white/10 bg-nightscreen shadow-xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-1"
+        className="group relative -mt-[24%] ml-auto w-[52%] rotate-3 rounded-2xl shadow-xl shadow-black/50 transition-transform duration-500 ease-out hover:rotate-1"
       >
-        <Link href={`/projects/${small.id}`} className="block">
+        <BorderGlow
+          edgeSensitivity={42}
+          glowColor="40 80 80"
+          backgroundColor="#121216"
+          borderRadius={16}
+          glowRadius={48}
+          glowIntensity={0.8}
+          coneSpread={23}
+          animated
+          colors={["#c084fc", "#f472b6", "#38bdf8"]}
+        >
+          <Link href={`/projects/${small.id}`} className="block">
           <div className="overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -285,6 +308,7 @@ function HeroCollage({ d }: { d: number }) {
             {small.category}
           </span>
         </Link>
+        </BorderGlow>
       </motion.div>
 
       <motion.span
@@ -962,22 +986,34 @@ function SectionRoad() {
           ))}
         </div>
         <Reveal className="mt-20">
-          <div className="rounded-2xl border border-white/10 p-8 md:p-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-volt">
-              Origins of the craft
-            </p>
-            <div className="mt-6 grid gap-6 md:grid-cols-3">
-              {education.map((ed) => (
-                <div key={ed.school} className="border-t border-white/10 pt-4">
-                  <p className="font-mono text-[10px] text-white/40">{ed.period}</p>
-                  <h4 className="mt-2 font-serif text-lg text-white">
-                    {ed.school}
-                  </h4>
-                  <p className="mt-1 text-sm text-white/60">{ed.degree}</p>
-                </div>
-              ))}
+<BorderGlow
+            edgeSensitivity={42}
+            glowColor="40 80 80"
+            backgroundColor="#121216"
+            borderRadius={16}
+            glowRadius={48}
+            glowIntensity={0.8}
+            coneSpread={23}
+            animated
+            colors={["#c084fc", "#f472b6", "#38bdf8"]}
+          >
+            <div className="p-8 md:p-10">
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-volt">
+                Origins of the craft
+              </p>
+              <div className="mt-6 grid gap-6 md:grid-cols-3">
+                {education.map((ed) => (
+                  <div key={ed.school} className="border-t border-white/10 pt-4">
+                    <p className="font-mono text-[10px] text-white/40">{ed.period}</p>
+                    <h4 className="mt-2 font-serif text-lg text-white">
+                      {ed.school}
+                    </h4>
+                    <p className="mt-1 text-sm text-white/60">{ed.degree}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </BorderGlow>
         </Reveal>
       </div>
     </section>

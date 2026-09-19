@@ -134,7 +134,7 @@ export function BorderGlow({
     >
       <div
         ref={glowRef}
-        className="pointer-events-none absolute left-0 top-0 z-[1] opacity-0 [mix-blend-mode:screen] will-change-transform"
+        className="pointer-events-none absolute left-0 top-0 z-[3] opacity-0 [mix-blend-mode:screen] will-change-transform"
       />
       <div className="relative z-[2]">{children}</div>
     </div>
