@@ -840,6 +840,7 @@ function ProjectCard({
         coneSpread={23}
         animated
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
+        className="border border-neutral-900"
       >
         <Link href={`/projects/${p.id}`} className="block">
           <div className={cn("relative overflow-hidden", ratio)}>
