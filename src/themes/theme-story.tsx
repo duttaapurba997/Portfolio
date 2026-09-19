@@ -393,15 +393,6 @@ function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-[9] bg-gradient-to-b from-transparent via-transparent to-night/60" />
       <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-16 px-6 pb-16 pt-32 md:px-10 lg:grid-cols-[1.15fr_0.9fr] lg:gap-8 lg:pt-40">
         <div>
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: d, ease: EASE }}
-            className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-white/50"
-          >
-            <span className={cn("h-2 w-2 rounded-full bg-volt", "cursor-blink")} />
-            {heroSticky.kicker}
-          </motion.p>
           <h1 className="mt-7 font-serif text-[13.5vw] leading-[0.95] tracking-tight sm:text-6xl md:text-8xl lg:text-[6.6rem]">
             <span className="block overflow-hidden">
               <motion.span
@@ -432,14 +423,6 @@ function Hero() {
             className="mt-10 max-w-2xl text-lg leading-relaxed text-white/70"
           >
             {heroSticky.sub}
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: d + 0.48, ease: EASE }}
-            className="mt-4 max-w-2xl font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-white/40"
-          >
-            {heroSticky.personality}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
