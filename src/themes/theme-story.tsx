@@ -818,13 +818,44 @@ function ProjectCard({
   ratio: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 120, damping: 16, mass: 0.4 });
+  const sy = useSpring(my, { stiffness: 120, damping: 16, mass: 0.4 });
+  const rotateX = useTransform(sy, [-0.5, 0.5], [9, -9]);
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-11, 11]);
+  const glareX = useTransform(sx, [-0.5, 0.5], [15, 85]);
+  const glareY = useTransform(sy, [-0.5, 0.5], [15, 85]);
+  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.20), transparent 62%)`;
+
+  const onMove = (e: { clientX: number; clientY: number; currentTarget: HTMLDivElement }) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - rect.left) / rect.width - 0.5);
+    my.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const onLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
+
   return (
-    <div ref={ref} className={cn("group", flip && "md:mt-28")}>
+    <div
+      ref={ref}
+      onMouseMove={reduce ? undefined : onMove}
+      onMouseLeave={reduce ? undefined : onLeave}
+      className={cn("group [perspective:1400px]", flip && "md:mt-28")}
+    >
+      <motion.div
+        style={reduce ? {} : { rotateX, rotateY }}
+        className="relative [transform-style:preserve-3d]"
+      >
       <BorderGlow
         edgeSensitivity={14}
         glowColor="40 80 80"
@@ -872,6 +903,12 @@ function ProjectCard({
           </div>
         </Link>
       </BorderGlow>
+      <motion.span
+        aria-hidden
+        style={{ background: glare }}
+        className="pointer-events-none absolute inset-0 rounded-[22px]"
+      />
+      </motion.div>
     </div>
   );
 }
