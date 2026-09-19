@@ -17,7 +17,7 @@
   --color-inksoft: #4d463c;
   --color-ember: #c96f4a;
   --color-moss: #34402f;
-  --color-volt: #d8ff3f;
+  --color-volt: #a6dce0;
   --color-emberhot: #ff5c1f;
   --color-night: #0a0a0c;
   --color-nightscreen: #121216;
@@ -169,7 +169,7 @@
 }
 
 @utility text-stroke-volt {
-  -webkit-text-stroke: 1.5px rgb(216 255 63);
+  -webkit-text-stroke: 1.5px rgb(166 220 224);
   color: transparent;
 }
 

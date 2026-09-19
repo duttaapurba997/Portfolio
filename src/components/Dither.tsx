@@ -43,6 +43,7 @@ export function Dither({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const mouse = useRef({ x: 0.5, y: 0.5, active: false });
+  const visible = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -94,6 +95,14 @@ export function Dither({
     const ro = new ResizeObserver(resize);
     ro.observe(wrap);
 
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible.current = entries[0]?.isIntersecting ?? true;
+      },
+      { threshold: 0 }
+    );
+    io.observe(wrap);
+
     const onMove = (e: PointerEvent) => {
       const rect = wrap.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
@@ -112,6 +121,10 @@ export function Dither({
     const t0 = performance.now();
 
     const frame = (now: number) => {
+      if (!visible.current) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       const dt = (now - t0) / 1000;
       const t = disableAnimation ? 0 : dt;
       const twoPi = Math.PI * 2;
@@ -180,6 +193,7 @@ export function Dither({
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
       if (enableMouseInteraction) {
         wrap.removeEventListener("pointermove", onMove);
         wrap.removeEventListener("pointerleave", onLeave);

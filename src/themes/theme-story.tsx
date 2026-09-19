@@ -333,15 +333,14 @@ function Hero() {
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-night bg-grid-volt text-white"
     >
       <Dither
-        waveColor={[0.05, 0.3, 0.34]}
+        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
         disableAnimation={false}
         enableMouseInteraction={true}
-        mouseRadius={0.25}
-        colorNum={26}
-        waveAmplitude={0.06}
-        waveFrequency={4}
+        mouseRadius={0.2}
+        colorNum={9}
+        waveAmplitude={0.25}
+        waveFrequency={3}
         waveSpeed={0.04}
-        backgroundColor={[0.03, 0.03, 0.04]}
         className="-z-10 opacity-30"
       />
       <div className="pointer-events-none absolute inset-0 -z-[9] bg-gradient-to-b from-transparent via-transparent to-night/60" />
@@ -412,7 +411,7 @@ function Hero() {
             </Magnetic>
             <a
               href="#work"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80 transition-colors hover:border-volt hover:text-volt"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-md transition-colors hover:border-volt hover:bg-white/15 hover:text-volt"
             >
               Jump to the work
             </a>
@@ -737,7 +736,18 @@ function ToolMark({ name }: { name: string }) {
 
 function SectionCraft() {
   return (
-    <section id="craft" className="relative bg-night bg-grid-volt text-white">
+    <section id="craft" className="relative isolate bg-night bg-grid-volt text-white">
+      <Dither
+        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
+        disableAnimation={false}
+        enableMouseInteraction={true}
+        mouseRadius={0.2}
+        colorNum={9}
+        waveAmplitude={0.25}
+        waveFrequency={3}
+        waveSpeed={0.04}
+        className="-z-10 opacity-25"
+      />
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 02 — The Craft" dark />
         <div className="mt-16 grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
@@ -796,7 +806,7 @@ function SectionCraft() {
             {tools.map((t) => (
               <span
                 key={t}
-                className="mx-3 inline-flex shrink-0 items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] py-2 pl-2 pr-6"
+                className="mx-3 inline-flex shrink-0 items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] py-2 pl-2 pr-6 backdrop-blur-md"
               >
                 <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/[0.06]">
                   <ToolMark name={t} />
@@ -831,14 +841,14 @@ function ProjectCard({
   return (
     <div ref={ref} className={cn("group", flip && "md:mt-28")}>
       <BorderGlow
-        edgeSensitivity={42}
+        edgeSensitivity={14}
         glowColor="40 80 80"
-        backgroundColor="#000000"
-        borderRadius={23}
-        glowRadius={48}
-        glowIntensity={0.8}
-        coneSpread={23}
-        animated
+        backgroundColor="#120F17"
+        borderRadius={22}
+        glowRadius={59}
+        glowIntensity={0.6}
+        coneSpread={20}
+        animated={false}
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
         className="border border-white/10"
       >
@@ -850,29 +860,22 @@ function ProjectCard({
               referrerPolicy="no-referrer"
               loading="lazy"
               style={{ y }}
-              className="h-full w-full scale-[1.18] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.28]"
+              className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
             />
             <span className="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm">
               {p.category}
             </span>
-            <span className="absolute right-4 top-4 font-serif text-3xl italic text-white/25 transition-colors group-hover:text-volt">
-              {p.id}
-            </span>
-            <span className="absolute inset-x-0 bottom-0 translate-y-full bg-night/90 px-5 py-4 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-y-0">
-              <span className="block text-sm leading-snug text-white/85">
-                {p.blurb}
-              </span>
-              <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-volt">
-                Open the story
-                <ArrowUpRight className="h-3 w-3" />
-              </span>
-            </span>
           </div>
-          <div className="mt-5 flex items-center justify-between gap-4 border-t border-white/10 px-1 pt-4">
-            <h3 className="font-serif text-2xl leading-tight text-white transition-colors group-hover:text-volt md:text-[1.65rem]">
-              {p.title}
-            </h3>
-            <ArrowUpRight className="h-5 w-5 shrink-0 -translate-x-1 translate-y-1 text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+          <div className="flex items-center justify-between gap-4 px-5 py-4">
+            <div className="min-w-0">
+              <h3 className="truncate font-serif text-xl leading-tight text-white transition-colors group-hover:text-volt">
+                {p.title}
+              </h3>
+              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
+                № {p.id}
+              </p>
+            </div>
+            <ArrowUpRight className="h-5 w-5 shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt" />
           </div>
         </Link>
       </BorderGlow>
@@ -904,7 +907,18 @@ function TitleMarquee() {
 
 function FeaturedWork() {
   return (
-    <section id="work" className="relative overflow-hidden bg-night bg-grid-volt text-white">
+    <section id="work" className="relative isolate overflow-hidden bg-night bg-grid-volt text-white">
+      <Dither
+        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
+        disableAnimation={false}
+        enableMouseInteraction={true}
+        mouseRadius={0.2}
+        colorNum={9}
+        waveAmplitude={0.25}
+        waveFrequency={3}
+        waveSpeed={0.04}
+        className="-z-10 opacity-25"
+      />
       <span
         aria-hidden
         className="pointer-events-none absolute right-0 top-32 select-none font-serif text-[15rem] italic leading-none text-stroke text-volt/15"
@@ -950,7 +964,18 @@ function FeaturedWork() {
 
 function SectionRoad() {
   return (
-    <section id="road" className="relative bg-night bg-grid-volt text-white">
+    <section id="road" className="relative isolate bg-night bg-grid-volt text-white">
+      <Dither
+        waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
+        disableAnimation={false}
+        enableMouseInteraction={true}
+        mouseRadius={0.2}
+        colorNum={9}
+        waveAmplitude={0.25}
+        waveFrequency={3}
+        waveSpeed={0.04}
+        className="-z-10 opacity-25"
+      />
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 04 — The Road" dark />
         <div className="mt-14">

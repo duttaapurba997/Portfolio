@@ -26,15 +26,14 @@ export function ProjectDetail({ project, projects }: { project: Project; project
     <div className="relative min-h-screen bg-night font-sans text-white">
       <div className="absolute inset-0">
         <Dither
-          waveColor={[0.11, 0.36, 0.39]}
+          waveColor={[0.050980392156862744, 0.41568627450980394, 0.44313725490196076]}
           disableAnimation={false}
           enableMouseInteraction={true}
-          mouseRadius={0.3}
-          colorNum={27.5}
-          waveAmplitude={0}
-          waveFrequency={10}
+          mouseRadius={0.2}
+          colorNum={9}
+          waveAmplitude={0.25}
+          waveFrequency={3}
           waveSpeed={0.04}
-          backgroundColor={[0.168, 0.184, 0.2]}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-transparent to-night" />
       </div>
@@ -125,7 +124,7 @@ export function ProjectDetail({ project, projects }: { project: Project; project
               <div className="mt-6 flex flex-wrap items-center gap-4">
                 <Link
                   href="/#work"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-volt hover:text-volt"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white backdrop-blur-md transition-colors hover:border-volt hover:bg-white/15 hover:text-volt"
                 >
                   Back to all work
                 </Link>

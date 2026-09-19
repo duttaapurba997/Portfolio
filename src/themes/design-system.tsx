@@ -240,7 +240,7 @@ export function DesignSystemDocs() {
                 ["ember", "#C96F4A", "Editorial accent on light", "bg-[#C96F4A]", "light"],
                 ["emberhot", "#FF5C1F", "High-energy accent", "bg-[#FF5C1F]", "light"],
                 ["moss", "#34402F", "Status / quiet green", "bg-[#34402F]", "light"],
-                ["volt", "#D8FF3F", "Signal accent on dark", "bg-[#D8FF3F]", "light"],
+                ["volt", "#A6DCE0", "Signal accent on dark", "bg-[#A6DCE0]", "light"],
                 ["night", "#0A0A0C", "Dark canvas", "bg-[#0A0A0C]", "none"],
                 ["nightscreen", "#121216", "Raised surface on dark", "bg-[#121216]", "light"],
                 ["spec", "#F4F3ED", "Spec-sheet surface", "bg-[#F4F3ED]", "dark"],
@@ -586,11 +586,11 @@ export function DesignSystemDocs() {
                     ["--background", "#0A0A0C", "night canvas"],
                     ["--foreground", "#FFFFFF", "primary text on dark"],
                     ["--muted", "#121216", "raised dark surface"],
-                    ["--primary", "#D8FF3F", "volt signal"],
+                    ["--primary", "#A6DCE0", "volt signal"],
                     ["--accent-ember", "#C96F4A", "editorial accent"],
                     ["--card", "#121216", "card surface"],
                     ["--border", "rgba(255,255,255,0.10)", "hairline"],
-                    ["--ring", "#D8FF3F", "focus ring"],
+                    ["--ring", "#A6DCE0", "focus ring"],
                     ["--radius", "0.5rem", "control radius"],
                   ].map(([t, v, r]) => (
                     <tr key={t} className="transition-colors hover:bg-white/[0.03]">
