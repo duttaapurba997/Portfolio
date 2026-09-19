@@ -956,7 +956,7 @@ function TitleMarquee() {
 function FeaturedWork() {
   return (
     <section id="work" className="relative isolate overflow-hidden bg-night text-white">
-      <div className="absolute inset-0 -z-10 opacity-25">
+      <div className="absolute inset-0 -z-10 opacity-45">
         <Particles
           particleColors={["#caffff"]}
           particleCount={300}
