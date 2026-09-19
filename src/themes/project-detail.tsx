@@ -26,7 +26,7 @@ export function ProjectDetail({ project, projects }: { project: Project; project
     <div className="relative min-h-screen bg-night font-sans text-white">
       <div className="absolute inset-0">
         <Particles
-          particleColors={["#518686"]}
+          particleColors={["#caffff"]}
           particleCount={300}
           particleSpread={10}
           speed={0.1}

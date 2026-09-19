@@ -334,7 +334,7 @@ function Hero() {
     >
       <div className="absolute inset-0 -z-10 opacity-30">
         <Particles
-          particleColors={["#518686"]}
+          particleColors={["#caffff"]}
           particleCount={300}
           particleSpread={10}
           speed={0.1}
@@ -740,7 +740,7 @@ function SectionCraft() {
     <section id="craft" className="relative isolate bg-night text-white">
       <div className="absolute inset-0 -z-10 opacity-25">
         <Particles
-          particleColors={["#518686"]}
+          particleColors={["#caffff"]}
           particleCount={300}
           particleSpread={10}
           speed={0.1}
@@ -935,7 +935,7 @@ function FeaturedWork() {
     <section id="work" className="relative isolate overflow-hidden bg-night text-white">
       <div className="absolute inset-0 -z-10 opacity-25">
         <Particles
-          particleColors={["#518686"]}
+          particleColors={["#caffff"]}
           particleCount={300}
           particleSpread={10}
           speed={0.1}
@@ -993,7 +993,7 @@ function SectionRoad() {
     <section id="road" className="relative isolate bg-night text-white">
       <div className="absolute inset-0 -z-10 opacity-25">
         <Particles
-          particleColors={["#518686"]}
+          particleColors={["#caffff"]}
           particleCount={300}
           particleSpread={10}
           speed={0.1}
