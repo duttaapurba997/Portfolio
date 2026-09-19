@@ -103,7 +103,7 @@ export function BorderGlow({
 
     if (!animated) {
       const rgb = parseRgb(glowColor);
-      glow.style.background = `radial-gradient(ellipse at 50% 100%, ${rgba(rgb, 1)} 0%, ${rgba(rgb, 0.9)} 24%, transparent 68%)`;
+      glow.style.background = `radial-gradient(ellipse at 50% 50%, ${rgba(rgb, 1)} 0%, ${rgba(rgb, 0.9)} 26%, transparent 64%)`;
       return;
     }
 
@@ -119,7 +119,7 @@ export function BorderGlow({
       const idx = Math.floor(t / period) % palette.length;
       const p = (t % period) / period;
       const mix = mixRgb(palette[idx], palette[(idx + 1) % palette.length], p);
-      glow.style.background = `radial-gradient(ellipse at 50% 100%, ${rgba(mix, 1)} 0%, ${rgba(mix, 0.85)} 24%, transparent 68%)`;
+      glow.style.background = `radial-gradient(ellipse at 50% 50%, ${rgba(mix, 1)} 0%, ${rgba(mix, 0.9)} 26%, transparent 64%)`;
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
