@@ -217,14 +217,64 @@ function HeroCollage({ d }: { d: number }) {
       />
 
       {art ? (
-        <motion.img
-          ref={imgRef}
-          src="/hero-collage.png"
-          alt="Design process collage — wireframes, laptop, notes and pen"
-          onError={() => setArt(false)}
+        <motion.div
           style={reduce ? {} : { rotateX, rotateY }}
-          className="relative mt-[6%] h-auto w-full shadow-2xl shadow-black/50 transition-transform duration-500 ease-out [transform-style:preserve-3d] group-hover:scale-[1.01]"
-        />
+          className="relative -mt-2 [transform-style:preserve-3d] lg:-mt-10"
+        >
+          <motion.img
+            ref={imgRef}
+            src="/hero-collage.png"
+            alt="Design process collage — wireframes, laptop, notes and pen"
+            onError={() => setArt(false)}
+            className="relative h-auto w-full shadow-2xl shadow-black/50 transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+          />
+          {/* curved arrow */}
+          <motion.span
+            aria-hidden
+            animate={reduce ? undefined : { y: [0, -7, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute -left-2 -top-9 w-12 text-volt/70 md:-left-6 md:w-14"
+          >
+            <svg viewBox="0 0 64 48" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M8 40 C 24 36, 36 28, 48 12" />
+              <path d="M40 12 L49 10 L47 19" />
+            </svg>
+          </motion.span>
+          {/* approval check */}
+          <motion.span
+            aria-hidden
+            animate={reduce ? undefined : { y: [0, 6, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute -right-1 top-[6%] w-10 text-volt/70 md:-right-3 md:w-12"
+          >
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="24" cy="24" r="16" />
+              <path d="M17 24 l6 6 9 -12" />
+            </svg>
+          </motion.span>
+          {/* spark burst */}
+          <motion.span
+            aria-hidden
+            animate={reduce ? undefined : { scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute -bottom-5 left-[10%] w-9 text-volt/70"
+          >
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M20 5 v8 M20 27 v8 M5 20 h8 M27 20 h8" />
+            </svg>
+          </motion.span>
+          {/* underline squiggle */}
+          <motion.span
+            aria-hidden
+            animate={reduce ? undefined : { y: [0, -5, 0] }}
+            transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute -bottom-6 right-[8%] w-16 text-white/50"
+          >
+            <svg viewBox="0 0 72 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M4 12 C 16 4, 28 18, 40 10 S 60 12, 68 8" />
+            </svg>
+          </motion.span>
+        </motion.div>
       ) : (
         <>
       <motion.div
