@@ -30,6 +30,7 @@ import {
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import Particles from "@/components/Particles";
+import Grainient from "@/components/Grainient";
 import { BorderGlow } from "@/components/BorderGlow";
 
 function WordReveal({
@@ -918,16 +919,30 @@ function CraftProcessArt() {
 function SectionCraft() {
   return (
     <section id="craft" className="relative isolate bg-night text-white">
-      <div className="absolute inset-0 -z-10 opacity-25">
-        <Particles
-          particleColors={["#caffff"]}
-          particleCount={300}
-          particleSpread={10}
-          speed={0.1}
-          particleBaseSize={100}
-          moveParticlesOnHover={true}
-          alphaParticles={false}
-          disableRotation={false}
+      <div className="absolute inset-0 -z-10">
+        <Grainient
+          color1="#000000"
+          color2="#032f36"
+          color3="#098094"
+          timeSpeed={2.5}
+          colorBalance={0.0}
+          warpStrength={1.0}
+          warpFrequency={5.0}
+          warpSpeed={2.0}
+          warpAmplitude={50.0}
+          blendAngle={0.0}
+          blendSoftness={0.05}
+          rotationAmount={500.0}
+          noiseScale={2.0}
+          grainAmount={0.1}
+          grainScale={2.0}
+          grainAnimated={false}
+          contrast={1.5}
+          gamma={1.0}
+          saturation={1.0}
+          centerX={0.0}
+          centerY={0.0}
+          zoom={1.3}
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 pb-16 pt-24 md:px-10 md:pb-24 md:pt-36">
@@ -1228,16 +1243,30 @@ function ProjectCard({ p }: { p: Project }) {
 function FeaturedWork() {
   return (
     <section id="work" className="relative isolate overflow-hidden bg-night text-white">
-      <div className="absolute inset-0 -z-10 opacity-45">
-        <Particles
-          particleColors={["#caffff"]}
-          particleCount={300}
-          particleSpread={10}
-          speed={0.1}
-          particleBaseSize={100}
-          moveParticlesOnHover={true}
-          alphaParticles={false}
-          disableRotation={false}
+      <div className="absolute inset-0 -z-10">
+        <Grainient
+          color1="#000000"
+          color2="#032f36"
+          color3="#098094"
+          timeSpeed={2.5}
+          colorBalance={0.0}
+          warpStrength={1.0}
+          warpFrequency={5.0}
+          warpSpeed={2.0}
+          warpAmplitude={50.0}
+          blendAngle={0.0}
+          blendSoftness={0.05}
+          rotationAmount={500.0}
+          noiseScale={2.0}
+          grainAmount={0.1}
+          grainScale={2.0}
+          grainAnimated={false}
+          contrast={1.5}
+          gamma={1.0}
+          saturation={1.0}
+          centerX={0.0}
+          centerY={0.0}
+          zoom={1.3}
         />
       </div>
       <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-16 md:px-10 md:pb-24 md:pt-24">
