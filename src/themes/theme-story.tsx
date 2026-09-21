@@ -176,15 +176,9 @@ function HeroCollage({ d }: { d: number }) {
   const sy = useSpring(my, { stiffness: 120, damping: 16, mass: 0.4 });
   const rotateX = useTransform(sy, [-0.5, 0.5], [9, -9]);
   const rotateY = useTransform(sx, [-0.5, 0.5], [-11, 11]);
-  const glareX = useTransform(sx, [-0.5, 0.5], [15, 85]);
-  const glareY = useTransform(sy, [-0.5, 0.5], [15, 85]);
-  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.20), transparent 62%)`;
   const smallX = useTransform(sx, [-0.5, 0.5], [22, -22]);
   const smallY = useTransform(sy, [-0.5, 0.5], [16, -16]);
   const noteX = useTransform(sx, [-0.5, 0.5], [14, -14]);
-
-  const festive = projects[3];
-  const ui = projects[0];
 
   const onMove = (e: { clientX: number; clientY: number; currentTarget: HTMLDivElement }) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -216,74 +210,66 @@ function HeroCollage({ d }: { d: number }) {
       />
 
       <motion.div
-        style={reduce ? { y: yUp } : { y: yUp, rotateX, rotateY }}
-        className="relative mt-[26%] w-[84%] -rotate-2 shadow-2xl shadow-black/50 transition-transform duration-500 ease-out [transform-style:preserve-3d] group-hover:rotate-0"
+        style={reduce ? {} : { rotateX, rotateY }}
+        className="relative mt-[10%] [transform-style:preserve-3d]"
       >
-        <BorderGlow
-          edgeSensitivity={42}
-          glowColor="40 80 80"
-          backgroundColor="#121216"
-          borderRadius={16}
-          glowRadius={48}
-          glowIntensity={0.8}
-          coneSpread={23}
-          animated
-          colors={["#c084fc", "#f472b6", "#38bdf8"]}
-        >
-          <Link href={`/projects/${festive.id}`} className="block">
-          <div className="overflow-hidden rounded-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={festive.cover}
-              alt={festive.title}
-              referrerPolicy="no-referrer"
-              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-            />
-          </div>
-        </Link>
-        </BorderGlow>
-        <motion.span
+        {/* back vintage sheet */}
+        <motion.div
+          style={{ y: yDown }}
           aria-hidden
-          style={{ background: glare, transform: "translateZ(70px)" }}
-          className="pointer-events-none absolute inset-0 rounded-2xl"
-        />
-        <span
-          style={{ transform: "translateZ(70px)" }}
-          className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm"
+          className="absolute inset-x-[4%] bottom-[2%] top-[6%] -rotate-6 rounded-lg bg-[#E4DCC9] shadow-xl shadow-black/40 transition-transform duration-500 ease-out group-hover:-rotate-9 group-hover:-translate-x-2"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-volt" />
-          {festive.category}
-        </span>
-        <span
-          style={{ transform: "translateZ(50px)" }}
-          className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-night/95 via-night/40 to-transparent px-5 pb-4 pt-16"
-        >
-          <span className="font-serif text-base italic text-white/95 md:text-lg">
-            {festive.title}
-          </span>
-          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50">
-            № {festive.id}
-          </span>
-        </span>
-      </motion.div>
-
-      {/* paper note */}
-      <motion.div
-        style={reduce ? { y: yDown } : { y: yDown, x: noteX }}
-        className="absolute right-0 top-0 w-[48%]"
-      >
-        <div className="relative rotate-[5deg] rounded-lg bg-[#F2EFE6] p-4 text-ink shadow-xl shadow-black/40 transition-transform duration-500 ease-out group-hover:rotate-[8deg] group-hover:-translate-y-1.5 md:p-5">
-          <span aria-hidden className="absolute -top-2 left-8 h-5 w-16 -rotate-3 rounded-sm bg-volt/70" />
-          <p className="font-serif text-lg italic leading-snug md:text-xl">
-            Ideas
-            <br />
-            Systems
-            <br />
-            Experiences
-          </p>
-          <span aria-hidden className="absolute bottom-2 right-3 font-serif text-xl italic leading-none text-ink/30">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif text-[7rem] italic leading-none text-[#0A1E23]/10">
             ✳
           </span>
+          <span className="absolute inset-x-8 top-8 h-px bg-[#0A1E23]/15" />
+          <span className="absolute inset-x-12 top-12 h-px bg-[#0A1E23]/10" />
+        </motion.div>
+
+        {/* front note */}
+        <motion.div
+          style={reduce ? { y: yUp } : { y: yUp, x: noteX }}
+          className="relative ml-[10%] w-[74%]"
+        >
+          <div className="relative rotate-[3deg] rounded-lg bg-[#F2EFE6] p-5 text-ink shadow-2xl shadow-black/45 transition-transform duration-500 ease-out group-hover:rotate-[5deg] group-hover:-translate-y-1.5 md:p-6">
+            <span aria-hidden className="absolute -top-2 left-8 h-5 w-16 -rotate-3 rounded-sm bg-volt/70" />
+            <p className="font-serif text-xl italic leading-snug md:text-2xl">
+              Colour
+              <br />
+              Typography
+              <br />
+              Layout
+              <br />
+              Composition
+            </p>
+            <div aria-hidden className="mt-4 flex gap-1.5">
+              {["#123B3B", "#2A7F7F", "#5EC8C8"].map((c) => (
+                <span
+                  key={c}
+                  className="h-7 w-7 rounded-sm border border-ink/10"
+                  style={{ backgroundColor: c }}
+                />
+              ))}
+            </div>
+            <span aria-hidden className="absolute bottom-2 right-3 font-serif text-xl italic leading-none text-ink/30">
+              ✳
+            </span>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* pen */}
+      <motion.div
+        style={reduce ? {} : { x: smallX, y: smallY }}
+        aria-hidden
+        className="absolute bottom-[4%] left-[2%] w-36 md:w-44"
+      >
+        <div className="rotate-[24deg] transition-transform duration-500 ease-out group-hover:rotate-[32deg] group-hover:translate-x-1">
+          <div className="relative h-2.5 rounded-full bg-gradient-to-r from-[#0C2429] via-volt to-white shadow-lg shadow-black/40">
+            <span className="absolute -left-1 top-1/2 h-4 w-2 -translate-y-1/2 rounded-sm bg-[#0C2429]" />
+            <span className="absolute -right-1.5 top-1/2 h-0 w-0 -translate-y-1/2 border-y-4 border-l-8 border-y-transparent border-l-volt" />
+          </div>
+          <span className="absolute left-6 top-0 h-1 w-8 -translate-y-full rounded-sm bg-white/25" />
         </div>
       </motion.div>
 
@@ -311,40 +297,15 @@ function HeroCollage({ d }: { d: number }) {
         <path d="M42 8 L51 7 L49 16" />
       </svg>
 
-      {/* front UI card */}
-      <motion.div
-        style={{ y: yDown }}
-        className="absolute -bottom-8 left-0 w-[52%]"
+      {/* scribble star */}
+      <motion.span
+        aria-hidden
+        animate={reduce ? undefined : { y: [0, -8, 0], rotate: [0, 12, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[24%] right-[2%] font-serif text-3xl italic leading-none text-volt/50"
       >
-      <motion.div style={reduce ? {} : { x: smallX, y: smallY }}>
-        <Link href={`/projects/${ui.id}`} className="relative block">
-          <div className="rotate-[3deg] overflow-hidden rounded-2xl border border-white/15 shadow-xl shadow-black/50 transition-transform duration-500 ease-out group-hover:rotate-[1deg] group-hover:-translate-y-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={ui.cover}
-              alt={ui.title}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-            />
-          </div>
-          <span className="absolute bottom-3 left-3 rounded-full bg-volt px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-night">
-            {ui.category}
-          </span>
-        </Link>
-      </motion.div>
-      </motion.div>
-
-      <motion.a
-        href={socials[0].href}
-        target="_blank"
-        rel="noopener noreferrer"
-        animate={reduce ? undefined : { y: [0, -8, 0], rotate: [-3, -1.5, -3] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[4%] right-0 rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-volt hover:text-volt"
-      >
-        12 stories on Behance
-      </motion.a>
+        ✳
+      </motion.span>
     </motion.div>
   );
 }
@@ -751,6 +712,43 @@ function CraftProcessArt() {
   });
   return (
     <div className="relative mx-auto w-full max-w-sm text-volt">
+      {/* faint doodles drifting around the visual */}
+      <motion.span
+        aria-hidden
+        animate={reduce ? undefined : { y: [0, -9, 0], rotate: [0, 8, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -left-4 top-16 w-14 opacity-40 md:-left-8"
+      >
+        <svg viewBox="0 0 56 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <path d="M4 24 C 16 8, 30 28, 52 10" strokeDasharray="1 6" />
+        </svg>
+      </motion.span>
+      <motion.span
+        aria-hidden
+        animate={reduce ? undefined : { y: [0, 8, 0], rotate: [0, -10, 0] }}
+        transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -right-2 top-6 font-serif text-2xl italic leading-none opacity-40 md:-right-6"
+      >
+        ✳
+      </motion.span>
+      <motion.span
+        aria-hidden
+        animate={reduce ? undefined : { scale: [1, 1.25, 1], opacity: [0.35, 0.6, 0.35] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -left-1 bottom-16 text-lg leading-none opacity-40 md:left-2"
+      >
+        +
+      </motion.span>
+      <motion.span
+        aria-hidden
+        animate={reduce ? undefined : { y: [0, -7, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -bottom-2 right-10 w-16 opacity-40"
+      >
+        <svg viewBox="0 0 64 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <path d="M3 12 C 18 4, 30 18, 45 10 S 58 12, 61 8" />
+        </svg>
+      </motion.span>
       <svg
         viewBox="0 0 400 440"
         role="img"
@@ -868,7 +866,7 @@ function SectionCraft() {
           disableRotation={false}
         />
       </div>
-      <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
+      <div className="mx-auto max-w-7xl px-6 pb-16 pt-24 md:px-10 md:pb-24 md:pt-36">
         <ChapterHead kicker="Chapter 02 — The Craft" dark />
         <div className="mt-16 grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <div className="lg:sticky lg:top-32 lg:self-start">
@@ -932,6 +930,145 @@ function SectionCraft() {
   );
 }
 
+function CardArt({ id }: { id: string }) {
+  const cls = "h-auto w-[72%]";
+  const svgProps = {
+    viewBox: "0 0 120 120",
+    className: cls,
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 3,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+  } as const;
+  switch (id) {
+    case "01":
+      return (
+        <svg {...svgProps}>
+          <rect x="18" y="28" width="84" height="64" rx="8" fill="rgba(255,255,255,0.05)" />
+          <circle cx="28" cy="38" r="2" fill="currentColor" stroke="none" />
+          <circle cx="36" cy="38" r="2" fill="currentColor" stroke="none" opacity="0.5" />
+          <rect x="18" y="46" width="22" height="46" fill="currentColor" opacity="0.15" stroke="none" />
+          <rect x="48" y="68" width="11" height="16" rx="2" fill="#F0B45A" stroke="none" />
+          <rect x="63" y="58" width="11" height="26" rx="2" fill="currentColor" stroke="none" opacity="0.75" />
+          <rect x="78" y="64" width="11" height="20" rx="2" fill="currentColor" stroke="none" opacity="0.4" />
+        </svg>
+      );
+    case "02":
+      return (
+        <svg {...svgProps}>
+          <rect x="26" y="38" width="68" height="44" rx="6" fill="rgba(255,255,255,0.05)" />
+          <path d="M64 48 L52 66 h9 l-3 12 14 -20 h-9 z" fill="#F0B45A" stroke="none" />
+          <path d="M38 94 h44 l8 10 H30 Z" fill="currentColor" opacity="0.2" />
+        </svg>
+      );
+    case "03":
+      return (
+        <svg {...svgProps}>
+          <path d="M40 52 h40 l-5 42 a6 6 0 0 1 -6 5 h-28 a6 6 0 0 1 -6 -5 Z" fill="rgba(255,255,255,0.05)" />
+          <path d="M49 52 v-5 a11 11 0 0 1 22 0 v5" />
+          <circle cx="76" cy="72" r="9" fill="#F0B45A" stroke="none" />
+          <path d="M72 72 h8 M76 68 v8" stroke="#0A1E23" />
+        </svg>
+      );
+    case "04":
+      return (
+        <svg {...svgProps}>
+          <circle cx="52" cy="46" r="8" />
+          <circle cx="68" cy="46" r="8" />
+          <rect x="32" y="56" width="56" height="40" rx="5" fill="rgba(255,255,255,0.05)" />
+          <line x1="60" y1="56" x2="60" y2="96" stroke="#F0B45A" />
+          <line x1="32" y1="70" x2="88" y2="70" stroke="#F0B45A" />
+          <rect x="54" y="64" width="12" height="12" rx="2" fill="#F0B45A" stroke="none" />
+        </svg>
+      );
+    case "05":
+      return (
+        <svg {...svgProps}>
+          <path
+            d="M60 96 C55 86 35 73 35 57 C35 48 42 43 49 43 C54 43 58 46 60 50 C62 46 66 43 71 43 C78 43 85 48 85 57 C85 73 65 86 60 96 Z"
+            fill="#F0B45A"
+            stroke="none"
+          />
+          <circle cx="88" cy="34" r="5" />
+          <circle cx="99" cy="42" r="5" />
+          <circle cx="95" cy="55" r="5" />
+          <circle cx="82" cy="53" r="5" />
+          <circle cx="77" cy="42" r="5" />
+          <circle cx="88" cy="44" r="3.5" fill="#0A1E23" stroke="none" />
+        </svg>
+      );
+    case "06":
+      return (
+        <svg {...svgProps}>
+          <path d="M52 26 h16 l-3 12 h-10 Z" fill="currentColor" opacity="0.35" />
+          <path d="M55 38 h10 l7 48 -12 12 -12 -12 Z" fill="rgba(255,255,255,0.05)" />
+          <path d="M52 60 h16" stroke="#F0B45A" />
+        </svg>
+      );
+    case "07":
+      return (
+        <svg {...svgProps}>
+          <circle cx="60" cy="52" r="14" fill="#F0B45A" opacity="0.15" stroke="none" />
+          <path d="M60 58 C66 48 66 40 60 32 C54 40 54 48 60 58 Z" fill="#F0B45A" stroke="none" />
+          <line x1="60" y1="58" x2="60" y2="66" />
+          <path d="M28 72 h64 c0 14 -14 24 -32 24 s-32 -10 -32 -24 Z" fill="rgba(255,255,255,0.05)" />
+          <line x1="28" y1="72" x2="92" y2="72" stroke="#F0B45A" />
+        </svg>
+      );
+    case "08":
+      return (
+        <svg {...svgProps}>
+          <rect x="22" y="34" width="76" height="15" rx="3" fill="#F0B45A" stroke="none" opacity="0.9" />
+          <rect x="22" y="55" width="76" height="15" rx="3" fill="currentColor" stroke="none" opacity="0.45" />
+          <rect x="22" y="76" width="52" height="15" rx="3" fill="currentColor" stroke="none" opacity="0.25" />
+          <path d="M74 76 h24 v15 h-24" fill="none" opacity="0.6" />
+        </svg>
+      );
+    case "09":
+      return (
+        <svg {...svgProps}>
+          <path d="M28 58 L74 40 v44 L28 66 Z" fill="rgba(255,255,255,0.05)" />
+          <line x1="28" y1="66" x2="28" y2="88" />
+          <rect x="22" y="88" width="14" height="8" rx="3" fill="currentColor" stroke="none" opacity="0.6" />
+          <path d="M84 52 a16 16 0 0 1 0 20" stroke="#F0B45A" />
+          <path d="M92 46 a26 26 0 0 1 0 32" opacity="0.5" />
+        </svg>
+      );
+    case "10":
+      return (
+        <svg {...svgProps}>
+          <rect x="30" y="36" width="46" height="56" rx="7" transform="rotate(-8 53 64)" fill="rgba(255,255,255,0.05)" />
+          <rect x="46" y="32" width="46" height="56" rx="7" transform="rotate(7 69 60)" fill="rgba(255,255,255,0.08)" />
+          <circle cx="62" cy="52" r="5" fill="#F0B45A" stroke="none" />
+          <line x1="54" y1="66" x2="76" y2="66" opacity="0.6" />
+          <line x1="54" y1="74" x2="70" y2="74" opacity="0.4" />
+          <path d="M34 100 h52" strokeDasharray="2 6" />
+        </svg>
+      );
+    case "11":
+      return (
+        <svg {...svgProps}>
+          <rect x="52" y="22" width="16" height="10" rx="2" fill="currentColor" stroke="none" opacity="0.6" />
+          <rect x="55" y="32" width="10" height="12" />
+          <rect x="43" y="44" width="34" height="52" rx="7" fill="rgba(255,255,255,0.05)" />
+          <rect x="49" y="58" width="22" height="18" rx="3" fill="#F0B45A" stroke="none" opacity="0.85" />
+          <path d="M84 88 c3 5 3 9 0 12 c-3 -3 -3 -7 0 -12" fill="#F0B45A" stroke="none" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...svgProps}>
+          <path d="M60 22 C74 42 80 58 60 88 C40 58 46 42 60 22 Z" fill="rgba(255,255,255,0.05)" />
+          <circle cx="60" cy="62" r="6" />
+          <line x1="60" y1="68" x2="60" y2="88" />
+          <circle cx="88" cy="34" r="10" stroke="#F0B45A" />
+          <path d="M84 34 h8 M88 30 v8" stroke="#F0B45A" />
+        </svg>
+      );
+  }
+}
+
 function ProjectCard({ p }: { p: Project }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -984,30 +1121,34 @@ function ProjectCard({ p }: { p: Project }) {
           <div className="min-w-0 flex-1">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-volt">
               <span className="h-1.5 w-1.5 rounded-full bg-volt" />
-              {p.category}
+              {p.tag}
             </span>
             <h3 className="mt-3 font-sans text-xl font-bold leading-[1.15] tracking-tight text-white md:text-2xl">
               {p.title}
             </h3>
           </div>
-          <div className="relative w-[38%] shrink-0">
-            <span
-              aria-hidden
-              className="absolute inset-0 translate-x-2 translate-y-2 rotate-3 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-x-3.5 group-hover:translate-y-3.5 group-hover:rotate-6"
-            />
-            <span
-              aria-hidden
-              className="absolute inset-0 -rotate-2 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:-rotate-4"
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={p.cover}
-              alt={p.title}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              className="relative aspect-[3/4] w-full rounded-xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            />
-          </div>
+            <div className="relative w-[38%] shrink-0 -rotate-2 transition-transform duration-500 ease-out group-hover:rotate-0">
+              <span
+                aria-hidden
+                className="absolute inset-0 translate-x-2 translate-y-2 rotate-3 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-x-3.5 group-hover:translate-y-3.5 group-hover:rotate-6"
+              />
+              <span
+                aria-hidden
+                className="absolute inset-0 -rotate-2 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:-rotate-4"
+              />
+              <div className="relative flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#164449] via-[#0C2429] to-[#071315] text-volt transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+                <CardArt id={p.id} />
+                <span aria-hidden className="absolute left-[16%] top-[14%] animate-pulse text-[13px] leading-none text-volt/90">
+                  ✦
+                </span>
+                <span aria-hidden className="absolute bottom-[18%] right-[14%] animate-pulse text-[11px] leading-none text-white/70 [animation-delay:0.9s]">
+                  ✦
+                </span>
+                <span aria-hidden className="absolute right-[22%] top-[8%] animate-pulse text-[9px] leading-none text-volt/60 [animation-delay:1.6s]">
+                  ✦
+                </span>
+              </div>
+            </div>
         </Link>
       </BorderGlow>
       <motion.span
@@ -1061,7 +1202,7 @@ function FeaturedWork() {
       >
         03
       </span>
-      <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
+      <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-16 md:px-10 md:pb-36 md:pt-24">
         <ChapterHead kicker="Chapter 03 — The Work" dark />
         <div className="mt-14 flex flex-wrap items-end justify-between gap-6">
           <StoryTitle text="The proof, framed." accentWords={["framed."]} dark />

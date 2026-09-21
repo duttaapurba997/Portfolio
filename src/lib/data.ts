@@ -53,6 +53,7 @@ export type Project = {
     | "Social · Ads"
     | "Motion"
     | "Illustration";
+  tag: string;
   cover: string;
   href: string;
   blurb: string;
@@ -63,6 +64,7 @@ export const projects: Project[] = [
     id: "01",
     title: "CRM Tool UI Design",
     category: "UI/UX",
+    tag: "UI/UX",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/c69803180565011.Y3JvcCw5NzAsNzU5LDIxMywzMQ.png",
     href: "https://www.behance.net/gallery/180565011/CRM-Tool-UI-Design",
@@ -72,6 +74,7 @@ export const projects: Project[] = [
     id: "02",
     title: "Rebranding — Electronic",
     category: "Branding",
+    tag: "Branding",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/7ef179237528709.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/237528709/Rebranding-electronic",
@@ -81,6 +84,7 @@ export const projects: Project[] = [
     id: "03",
     title: "E-commerce Website UI",
     category: "UI/UX",
+    tag: "E-commerce UI",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/7eeb80180598107.Y3JvcCwzMTQzLDI0NTksNTI5LDA.png",
     href: "https://www.behance.net/gallery/180598107/E-commerce-website-UI",
@@ -90,6 +94,7 @@ export const projects: Project[] = [
     id: "04",
     title: "Merry Christmas — Festive Campaign",
     category: "Campaign",
+    tag: "Holiday Campaign",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/e7d174223373985.Y3JvcCwzMTQzLDI0NTksNDI3LDA.png",
     href: "https://www.behance.net/gallery/223373985/Merry-Christmas-Festive-campaign",
@@ -99,6 +104,7 @@ export const projects: Project[] = [
     id: "05",
     title: "Festive Campaign — Mother's Day",
     category: "Campaign",
+    tag: "Mother's Day",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/eded8e208651001.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/208651001/Festive-campaign-(mothers-day)",
@@ -108,6 +114,7 @@ export const projects: Project[] = [
     id: "06",
     title: "Interactive Campaign — Father's Day",
     category: "Campaign",
+    tag: "Interactive",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/7182d3208651645.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/208651645/Interactive-campaign-(Fathers-day)",
@@ -117,6 +124,7 @@ export const projects: Project[] = [
     id: "07",
     title: "Indian Festive Campaign",
     category: "Campaign",
+    tag: "Indian Festive",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/aad9e6212853771.Y3JvcCwzMTQzLDI0NTksMzk2LDA.png",
     href: "https://www.behance.net/gallery/212853771/Indian-Festive-Campaign",
@@ -126,6 +134,7 @@ export const projects: Project[] = [
     id: "08",
     title: "Banner Projects",
     category: "Social · Ads",
+    tag: "Banners",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/dc5a2c185724507.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/185724507/Banner-projects",
@@ -135,6 +144,7 @@ export const projects: Project[] = [
     id: "09",
     title: "Advertisements Projects",
     category: "Social · Ads",
+    tag: "Ad Creatives",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/daaef8185723577.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/185723577/Advertisements-projects",
@@ -144,6 +154,7 @@ export const projects: Project[] = [
     id: "10",
     title: "Carousel Projects",
     category: "Social · Ads",
+    tag: "Carousels",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/dfb44f185713113.Y3JvcCwzMTQzLDI0NTksNTI5LDA.png",
     href: "https://www.behance.net/gallery/185713113/Carousel-projects",
@@ -153,6 +164,7 @@ export const projects: Project[] = [
     id: "11",
     title: "Packaging Design — Edible Oils",
     category: "Packaging",
+    tag: "Packaging",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/187bb4148367831.Y3JvcCw5NDMsNzM3LDAsNDI.png",
     href: "https://www.behance.net/gallery/148367831/Packaging-design-2",
@@ -162,6 +174,7 @@ export const projects: Project[] = [
     id: "12",
     title: "Logo Design — Set of Marks",
     category: "Branding",
+    tag: "Logo Design",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/c8bf59147595087.Y3JvcCw3MzIsNTcyLDg1LDA.png",
     href: "https://www.behance.net/gallery/147595087/Logo-design-1",
