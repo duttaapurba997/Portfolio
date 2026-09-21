@@ -767,15 +767,8 @@ function ToolMark({ name }: { name: string }) {
 
 function CraftProcessArt() {
   const reduce = useReducedMotion();
-  const float = (duration: number, dy = -7) =>
-    reduce ? undefined : { y: [0, dy, 0] };
-  const timing = (duration: number) => ({
-    duration,
-    repeat: Infinity,
-    ease: "easeInOut" as const,
-  });
   return (
-    <div className="relative mx-auto w-full max-w-sm text-volt">
+    <div className="group relative mx-auto w-full max-w-sm text-volt">
       {/* faint doodles drifting around the visual */}
       <motion.span
         aria-hidden
@@ -813,104 +806,63 @@ function CraftProcessArt() {
           <path d="M3 12 C 18 4, 30 18, 45 10 S 58 12, 61 8" />
         </svg>
       </motion.span>
-      <svg
-        viewBox="0 0 400 440"
-        role="img"
-        aria-label="From user needs to prototype"
-        className="h-auto w-full overflow-visible"
-      >
-        <defs>
-          <marker
-            id="craft-arrow"
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto-start-reverse"
-          >
-            <path d="M0 0L10 5L0 10z" fill="currentColor" opacity="0.7" />
-          </marker>
-        </defs>
-        {/* connector arrows */}
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="5 5"
-          opacity="0.55"
-        >
-          <path d="M118 96 C 140 110, 150 128, 158 148" markerEnd="url(#craft-arrow)" />
-          <path d="M282 96 C 260 110, 250 128, 242 148" markerEnd="url(#craft-arrow)" />
-          <path d="M112 300 C 132 316, 148 322, 168 326" markerEnd="url(#craft-arrow)" />
-          <path d="M288 300 C 268 316, 252 322, 232 326" markerEnd="url(#craft-arrow)" />
-          <path d="M96 356 C 130 384, 200 392, 262 378" markerEnd="url(#craft-arrow)" />
-        </g>
-        {/* phone wireframe */}
-        <g
-          fill="rgba(255,255,255,0.03)"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="140" y="128" width="120" height="208" rx="20" />
-          <rect x="156" y="150" width="88" height="64" rx="8" fill="none" opacity="0.7" />
-          <circle cx="176" cy="168" r="6" fill="none" opacity="0.7" />
-          <path
-            d="M156 206 L182 184 L198 198 L212 186 L244 206 Z"
-            fill="none"
-            opacity="0.7"
-          />
-          <line x1="156" y1="230" x2="244" y2="230" opacity="0.5" />
-          <line x1="156" y1="244" x2="216" y2="244" opacity="0.35" />
-          <line x1="156" y1="258" x2="228" y2="258" opacity="0.35" />
-          <rect x="156" y="276" width="88" height="26" rx="13" fill="none" opacity="0.7" />
-          <rect x="182" y="312" width="36" height="5" rx="2.5" fill="currentColor" opacity="0.6" stroke="none" />
-        </g>
-        {/* sticky notes */}
-        <motion.g animate={float(5)} transition={timing(5)}>
-          <g transform="rotate(-8 70 70)">
-            <rect x="18" y="44" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
-            <text x="70" y="66" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">USER</text>
-            <text x="70" y="82" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">NEEDS</text>
-          </g>
-        </motion.g>
-        <motion.g animate={float(6.5)} transition={timing(6.5)}>
-          <g transform="rotate(5 330 70)">
-            <rect x="278" y="44" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
-            <text x="330" y="66" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">UI</text>
-            <text x="330" y="82" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">DESIGN</text>
-          </g>
-        </motion.g>
-        <motion.g animate={float(6)} transition={timing(6)}>
-          <g transform="rotate(4 66 300)">
-            <rect x="14" y="274" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
-            <text x="66" y="296" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">WIRE-</text>
-            <text x="66" y="312" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">FRAMES</text>
-          </g>
-        </motion.g>
-        <motion.g animate={float(5.5)} transition={timing(5.5)}>
-          <g transform="rotate(-5 334 300)">
-            <rect x="282" y="274" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
-            <text x="334" y="296" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">PROTO-</text>
-            <text x="334" y="312" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">TYPE</text>
-          </g>
-        </motion.g>
-        {/* user badge */}
-        <motion.g animate={float(7)} transition={timing(7)}>
-          <circle cx="330" cy="180" r="26" fill="rgba(202,255,255,0.06)" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="330" cy="173" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M318 192 C 320 184, 340 184, 342 192" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        </motion.g>
-      </svg>
-      {/* Drop a transparent craft-process.png in /public to use it instead */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/craft-process.png"
-        alt=""
-        aria-hidden
-        onError={(e) => e.currentTarget.remove()}
-        className="absolute inset-0 h-full w-full object-contain"
+        src="/craft-visual.png"
+        alt="Design craft at work — typography, color, layout and motion"
+        className="h-auto w-full"
       />
+      {/* orbit ring — dashes crawl around it, brightens on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-5 opacity-60 transition-opacity duration-500 group-hover:opacity-100"
+      >
+        <motion.svg
+          viewBox="0 0 400 280"
+          className="h-full w-full overflow-visible"
+          animate={reduce ? undefined : { rotate: [0, 360] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        >
+          <motion.ellipse
+            cx="200"
+            cy="140"
+            rx="196"
+            ry="122"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeDasharray="5 9"
+            transform="rotate(-10 200 140)"
+            animate={reduce ? undefined : { strokeDashoffset: [0, -56] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+          />
+        </motion.svg>
+      </div>
+      {/* sparkles — twinkle always, flare up on hover */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-[6%] top-[20%] text-xl leading-none text-volt/70 transition-all duration-300 group-hover:scale-125 group-hover:text-white"
+      >
+        <motion.span
+          className="block"
+          animate={reduce ? undefined : { scale: [1, 1.35, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          ✦
+        </motion.span>
+      </span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute bottom-[14%] right-[4%] text-2xl leading-none text-volt/70 transition-all duration-300 group-hover:scale-125 group-hover:text-white"
+      >
+        <motion.span
+          className="block"
+          animate={reduce ? undefined : { scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+        >
+          ✦
+        </motion.span>
+      </span>
     </div>
   );
 }
