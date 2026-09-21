@@ -768,7 +768,7 @@ function ToolMark({ name }: { name: string }) {
 function CraftProcessArt() {
   const reduce = useReducedMotion();
   return (
-    <div className="group relative mx-auto w-full max-w-sm text-volt">
+    <div className="relative mx-auto w-full max-w-sm text-volt">
       {/* faint doodles drifting around the visual */}
       <motion.span
         aria-hidden
@@ -812,36 +812,10 @@ function CraftProcessArt() {
         alt="Design craft at work — typography, color, layout and motion"
         className="h-auto w-full"
       />
-      {/* orbit ring — dashes crawl around it, brightens on hover */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-5 opacity-60 transition-opacity duration-500 group-hover:opacity-100"
-      >
-        <motion.svg
-          viewBox="0 0 400 280"
-          className="h-full w-full overflow-visible"
-          animate={reduce ? undefined : { rotate: [0, 360] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        >
-          <motion.ellipse
-            cx="200"
-            cy="140"
-            rx="196"
-            ry="122"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeDasharray="5 9"
-            transform="rotate(-10 200 140)"
-            animate={reduce ? undefined : { strokeDashoffset: [0, -56] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-          />
-        </motion.svg>
-      </div>
-      {/* sparkles — twinkle always, flare up on hover */}
+      {/* sparkles — gentle twinkle */}
       <span
         aria-hidden
-        className="pointer-events-none absolute left-[6%] top-[20%] text-xl leading-none text-volt/70 transition-all duration-300 group-hover:scale-125 group-hover:text-white"
+        className="pointer-events-none absolute left-[6%] top-[20%] text-xl leading-none text-volt/70"
       >
         <motion.span
           className="block"
@@ -853,7 +827,7 @@ function CraftProcessArt() {
       </span>
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-[14%] right-[4%] text-2xl leading-none text-volt/70 transition-all duration-300 group-hover:scale-125 group-hover:text-white"
+        className="pointer-events-none absolute bottom-[14%] right-[4%] text-2xl leading-none text-volt/70"
       >
         <motion.span
           className="block"
