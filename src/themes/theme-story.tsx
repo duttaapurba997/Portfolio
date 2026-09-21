@@ -50,7 +50,7 @@ function WordReveal({
     <span className={className}>
       {words.map((w, i) => {
         const accent = accentWords.includes(w.replace(/[^a-zA-Z]/g, ""));
-        return (
+  return (
           <span key={w + i} className="inline-block overflow-hidden align-bottom">
             <motion.span
               className={`inline-block will-change-transform ${accent ? accentClassName : ""}`}
@@ -181,9 +181,10 @@ function HeroCollage({ d }: { d: number }) {
   const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.20), transparent 62%)`;
   const smallX = useTransform(sx, [-0.5, 0.5], [22, -22]);
   const smallY = useTransform(sy, [-0.5, 0.5], [16, -16]);
+  const noteX = useTransform(sx, [-0.5, 0.5], [14, -14]);
 
-  const big = projects[1];
-  const small = projects[8];
+  const festive = projects[3];
+  const ui = projects[0];
 
   const onMove = (e: { clientX: number; clientY: number; currentTarget: HTMLDivElement }) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -203,7 +204,7 @@ function HeroCollage({ d }: { d: number }) {
       transition={{ duration: 0.9, delay: d + 0.45, ease: EASE }}
       onMouseMove={reduce ? undefined : onMove}
       onMouseLeave={reduce ? undefined : onLeave}
-      className="relative mx-auto w-full max-w-md [perspective:1400px] lg:max-w-lg"
+      className="group relative mx-auto w-full max-w-md [perspective:1400px] lg:max-w-lg"
     >
       <span
         aria-hidden
@@ -216,7 +217,7 @@ function HeroCollage({ d }: { d: number }) {
 
       <motion.div
         style={reduce ? { y: yUp } : { y: yUp, rotateX, rotateY }}
-        className="group relative w-[82%] -rotate-2 shadow-2xl shadow-black/50 [transform-style:preserve-3d]"
+        className="relative mt-[26%] w-[84%] -rotate-2 shadow-2xl shadow-black/50 transition-transform duration-500 ease-out [transform-style:preserve-3d] group-hover:rotate-0"
       >
         <BorderGlow
           edgeSensitivity={42}
@@ -229,12 +230,12 @@ function HeroCollage({ d }: { d: number }) {
           animated
           colors={["#c084fc", "#f472b6", "#38bdf8"]}
         >
-          <Link href={`/projects/${big.id}`} className="block">
+          <Link href={`/projects/${festive.id}`} className="block">
           <div className="overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={big.cover}
-              alt={big.title}
+              src={festive.cover}
+              alt={festive.title}
               referrerPolicy="no-referrer"
               className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
             />
@@ -251,59 +252,86 @@ function HeroCollage({ d }: { d: number }) {
           className="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-night/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-volt" />
-          {big.category}
+          {festive.category}
         </span>
         <span
           style={{ transform: "translateZ(50px)" }}
           className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-night/95 via-night/40 to-transparent px-5 pb-4 pt-16"
         >
           <span className="font-serif text-base italic text-white/95 md:text-lg">
-            {big.title}
+            {festive.title}
           </span>
           <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50">
-            № {big.id}
+            № {festive.id}
           </span>
         </span>
       </motion.div>
 
+      {/* paper note */}
+      <motion.div
+        style={reduce ? { y: yDown } : { y: yDown, x: noteX }}
+        className="absolute right-0 top-0 w-[48%]"
+      >
+        <div className="relative rotate-[5deg] rounded-lg bg-[#F2EFE6] p-4 text-ink shadow-xl shadow-black/40 transition-transform duration-500 ease-out group-hover:rotate-[8deg] group-hover:-translate-y-1.5 md:p-5">
+          <span aria-hidden className="absolute -top-2 left-8 h-5 w-16 -rotate-3 rounded-sm bg-volt/70" />
+          <p className="font-serif text-lg italic leading-snug md:text-xl">
+            Ideas
+            <br />
+            Systems
+            <br />
+            Experiences
+          </p>
+          <span aria-hidden className="absolute bottom-2 right-3 font-serif text-xl italic leading-none text-ink/30">
+            ✳
+          </span>
+        </div>
+      </motion.div>
+
+      {/* palette strip */}
+      <div
+        aria-hidden
+        className="absolute left-[2%] top-[5%] flex -rotate-6 gap-1 rounded-md border border-white/15 bg-night/70 p-1.5 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:rotate-0"
+      >
+        {["#CAFFFF", "#5EC8C8", "#2A7F7F", "#123B3B"].map((c) => (
+          <span key={c} className="h-6 w-6 rounded-sm" style={{ backgroundColor: c }} />
+        ))}
+      </div>
+
+      {/* arrow doodle */}
+      <svg
+        aria-hidden
+        viewBox="0 0 60 40"
+        className="absolute left-[38%] top-[2%] w-12 -scale-x-100 text-volt/60"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      >
+        <path d="M6 34 C 22 30, 38 22, 50 8" strokeDasharray="1 5" />
+        <path d="M42 8 L51 7 L49 16" />
+      </svg>
+
+      {/* front UI card */}
       <motion.div
         style={{ y: yDown }}
-        className="relative -mt-[24%] ml-auto w-[52%]"
+        className="absolute -bottom-8 left-0 w-[52%]"
       >
       <motion.div style={reduce ? {} : { x: smallX, y: smallY }}>
-        <motion.div
-          animate={reduce ? undefined : { y: [0, -12, 0], rotate: [3, 1.5, 3] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="group relative rounded-2xl shadow-xl shadow-black/50"
-        >
-          <BorderGlow
-            edgeSensitivity={42}
-            glowColor="40 80 80"
-            backgroundColor="#121216"
-            borderRadius={16}
-            glowRadius={48}
-            glowIntensity={0.8}
-            coneSpread={23}
-            animated
-            colors={["#c084fc", "#f472b6", "#38bdf8"]}
-          >
-            <Link href={`/projects/${small.id}`} className="block">
-            <div className="overflow-hidden rounded-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={small.cover}
-                alt={small.title}
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-              />
-            </div>
-            <span className="absolute bottom-3 left-3 rounded-full bg-volt px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-night">
-              {small.category}
-            </span>
-          </Link>
-          </BorderGlow>
-        </motion.div>
+        <Link href={`/projects/${ui.id}`} className="relative block">
+          <div className="rotate-[3deg] overflow-hidden rounded-2xl border border-white/15 shadow-xl shadow-black/50 transition-transform duration-500 ease-out group-hover:rotate-[1deg] group-hover:-translate-y-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={ui.cover}
+              alt={ui.title}
+              referrerPolicy="no-referrer"
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            />
+          </div>
+          <span className="absolute bottom-3 left-3 rounded-full bg-volt px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-night">
+            {ui.category}
+          </span>
+        </Link>
       </motion.div>
       </motion.div>
 
@@ -313,14 +341,10 @@ function HeroCollage({ d }: { d: number }) {
         rel="noopener noreferrer"
         animate={reduce ? undefined : { y: [0, -8, 0], rotate: [-3, -1.5, -3] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -left-3 top-[58%] rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-volt hover:text-volt"
+        className="absolute bottom-[4%] right-0 rounded-xl border border-white/10 bg-night/85 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-volt hover:text-volt"
       >
         12 stories on Behance
       </motion.a>
-
-      <span className="absolute -left-10 top-1/2 hidden -translate-y-1/2 -rotate-90 font-mono text-[9px] uppercase tracking-[0.34em] text-white/35 lg:block">
-        Scroll to begin
-      </span>
     </motion.div>
   );
 }
@@ -409,10 +433,9 @@ function Hero() {
         transition={{ duration: 0.7, delay: d + 0.7, ease: EASE }}
         className="border-t border-white/10"
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-white/10 border-b border-white/10 font-mono text-[10px] uppercase tracking-[0.18em] md:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-white/10 border-b border-white/10 font-mono text-[10px] uppercase tracking-[0.18em] md:grid-cols-3">
           {[
             [profile.experience, "experience"],
-            ["Swiggy", "currently"],
             [profile.location, "based in"],
             ["2019", "the start"],
           ].map(([v, k]) => (
@@ -632,9 +655,8 @@ function SectionDesigner() {
               </div>
             </Reveal>
             <Reveal delay={0.1} className="mt-6">
-              <dl className="grid grid-cols-3 divide-x divide-ink/10 border-y border-ink/10">
+              <dl className="grid grid-cols-2 divide-x divide-ink/10 border-y border-ink/10">
                 {[
-                  ["Currently", profile.company],
                   ["Based", profile.location],
                   ["Since", "2019"],
                 ].map(([k, v]) => (
@@ -718,6 +740,119 @@ function ToolMark({ name }: { name: string }) {
   );
 }
 
+function CraftProcessArt() {
+  const reduce = useReducedMotion();
+  const float = (duration: number, dy = -7) =>
+    reduce ? undefined : { y: [0, dy, 0] };
+  const timing = (duration: number) => ({
+    duration,
+    repeat: Infinity,
+    ease: "easeInOut" as const,
+  });
+  return (
+    <div className="relative mx-auto w-full max-w-sm text-volt">
+      <svg
+        viewBox="0 0 400 440"
+        role="img"
+        aria-label="From user needs to prototype"
+        className="h-auto w-full overflow-visible"
+      >
+        <defs>
+          <marker
+            id="craft-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M0 0L10 5L0 10z" fill="currentColor" opacity="0.7" />
+          </marker>
+        </defs>
+        {/* connector arrows */}
+        <g
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="5 5"
+          opacity="0.55"
+        >
+          <path d="M118 96 C 140 110, 150 128, 158 148" markerEnd="url(#craft-arrow)" />
+          <path d="M282 96 C 260 110, 250 128, 242 148" markerEnd="url(#craft-arrow)" />
+          <path d="M112 300 C 132 316, 148 322, 168 326" markerEnd="url(#craft-arrow)" />
+          <path d="M288 300 C 268 316, 252 322, 232 326" markerEnd="url(#craft-arrow)" />
+          <path d="M96 356 C 130 384, 200 392, 262 378" markerEnd="url(#craft-arrow)" />
+        </g>
+        {/* phone wireframe */}
+        <g
+          fill="rgba(255,255,255,0.03)"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <rect x="140" y="128" width="120" height="208" rx="20" />
+          <rect x="156" y="150" width="88" height="64" rx="8" fill="none" opacity="0.7" />
+          <circle cx="176" cy="168" r="6" fill="none" opacity="0.7" />
+          <path
+            d="M156 206 L182 184 L198 198 L212 186 L244 206 Z"
+            fill="none"
+            opacity="0.7"
+          />
+          <line x1="156" y1="230" x2="244" y2="230" opacity="0.5" />
+          <line x1="156" y1="244" x2="216" y2="244" opacity="0.35" />
+          <line x1="156" y1="258" x2="228" y2="258" opacity="0.35" />
+          <rect x="156" y="276" width="88" height="26" rx="13" fill="none" opacity="0.7" />
+          <rect x="182" y="312" width="36" height="5" rx="2.5" fill="currentColor" opacity="0.6" stroke="none" />
+        </g>
+        {/* sticky notes */}
+        <motion.g animate={float(5)} transition={timing(5)}>
+          <g transform="rotate(-8 70 70)">
+            <rect x="18" y="44" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
+            <text x="70" y="66" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">USER</text>
+            <text x="70" y="82" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">NEEDS</text>
+          </g>
+        </motion.g>
+        <motion.g animate={float(6.5)} transition={timing(6.5)}>
+          <g transform="rotate(5 330 70)">
+            <rect x="278" y="44" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
+            <text x="330" y="66" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">UI</text>
+            <text x="330" y="82" textAnchor="middle" fontSize="12" letterSpacing="1.5" fill="currentColor" fontFamily="ui-monospace, monospace">DESIGN</text>
+          </g>
+        </motion.g>
+        <motion.g animate={float(6)} transition={timing(6)}>
+          <g transform="rotate(4 66 300)">
+            <rect x="14" y="274" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
+            <text x="66" y="296" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">WIRE-</text>
+            <text x="66" y="312" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">FRAMES</text>
+          </g>
+        </motion.g>
+        <motion.g animate={float(5.5)} transition={timing(5.5)}>
+          <g transform="rotate(-5 334 300)">
+            <rect x="282" y="274" width="104" height="52" rx="6" fill="rgba(202,255,255,0.08)" stroke="currentColor" strokeWidth="1.5" />
+            <text x="334" y="296" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">PROTO-</text>
+            <text x="334" y="312" textAnchor="middle" fontSize="11" letterSpacing="1.2" fill="currentColor" fontFamily="ui-monospace, monospace">TYPE</text>
+          </g>
+        </motion.g>
+        {/* user badge */}
+        <motion.g animate={float(7)} transition={timing(7)}>
+          <circle cx="330" cy="180" r="26" fill="rgba(202,255,255,0.06)" stroke="currentColor" strokeWidth="1.5" />
+          <circle cx="330" cy="173" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M318 192 C 320 184, 340 184, 342 192" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        </motion.g>
+      </svg>
+      {/* Drop a transparent craft-process.png in /public to use it instead */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/craft-process.png"
+        alt=""
+        aria-hidden
+        onError={(e) => e.currentTarget.remove()}
+        className="absolute inset-0 h-full w-full object-contain"
+      />
+    </div>
+  );
+}
+
 function SectionCraft() {
   return (
     <section id="craft" className="relative isolate bg-night text-white">
@@ -737,18 +872,7 @@ function SectionCraft() {
         <ChapterHead kicker="Chapter 02 — The Craft" dark />
         <div className="mt-16 grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <StoryTitle
-              text="Any message. Delivered so it lands."
-              accentWords={["lands."]}
-              chapter="The toolkit"
-              dark
-            />
-            <Reveal delay={0.05}>
-              <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/60">
-                Performance marketing, brand partnerships, product design — the
-                message changes, the delivery doesn&apos;t.
-              </p>
-            </Reveal>
+            <CraftProcessArt />
           </div>
           <div>
             {skillGroups.map((g, i) => (
@@ -808,23 +932,9 @@ function SectionCraft() {
   );
 }
 
-function ProjectCard({
-  p,
-  flip = false,
-  ratio,
-}: {
-  p: Project;
-  flip?: boolean;
-  ratio: string;
-}) {
+function ProjectCard({ p }: { p: Project }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 120, damping: 16, mass: 0.4 });
@@ -850,7 +960,7 @@ function ProjectCard({
       ref={ref}
       onMouseMove={reduce ? undefined : onMove}
       onMouseLeave={reduce ? undefined : onLeave}
-      className={cn("group [perspective:1400px]", flip && "md:mt-28")}
+      className="group [perspective:1400px]"
     >
       <motion.div
         style={reduce ? {} : { rotateX, rotateY }}
@@ -859,47 +969,44 @@ function ProjectCard({
       <BorderGlow
         edgeSensitivity={14}
         glowColor="40 80 80"
-        backgroundColor="#120F17"
+        backgroundColor="transparent"
         borderRadius={22}
         glowRadius={59}
         glowIntensity={0.6}
         coneSpread={20}
         animated={false}
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
-        className="border border-white/10"
       >
-        <Link href={`/projects/${p.id}`} className="block">
-          <div className={cn("relative overflow-hidden", ratio)}>
-            <motion.img
+        <Link
+          href={`/projects/${p.id}`}
+          className="relative flex items-center gap-4 overflow-hidden rounded-[22px] border border-white/10 bg-[#0A1E23]/70 p-5 backdrop-blur-md transition-colors duration-500 hover:border-volt/40 hover:bg-[#0C2429]/80 md:gap-6 md:p-6"
+        >
+          <div className="min-w-0 flex-1">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-volt">
+              <span className="h-1.5 w-1.5 rounded-full bg-volt" />
+              {p.category}
+            </span>
+            <h3 className="mt-3 font-sans text-xl font-bold leading-[1.15] tracking-tight text-white md:text-2xl">
+              {p.title}
+            </h3>
+          </div>
+          <div className="relative w-[38%] shrink-0">
+            <span
+              aria-hidden
+              className="absolute inset-0 translate-x-2 translate-y-2 rotate-3 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-x-3.5 group-hover:translate-y-3.5 group-hover:rotate-6"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 -rotate-2 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:-rotate-4"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={p.cover}
               alt={p.title}
               referrerPolicy="no-referrer"
               loading="lazy"
-              style={{ y }}
-              className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2]"
+              className="relative aspect-[3/4] w-full rounded-xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
-            <span className="absolute left-4 top-4 hidden rounded-full bg-night/80 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-volt backdrop-blur-sm md:inline-flex">
-              {p.category}
-            </span>
-          </div>
-          <div className="px-5 py-4 md:flex md:items-center md:justify-between md:gap-4">
-            <div className="min-w-0">
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="font-sans text-[26px] font-extrabold uppercase leading-[1.08] tracking-tight text-white md:truncate md:font-serif md:text-xl md:font-normal md:normal-case md:leading-tight md:tracking-normal md:transition-colors md:group-hover:text-volt">
-                  {p.title}
-                </h3>
-                <span className="mt-1 shrink-0 rounded-full border border-white/20 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70 md:hidden">
-                  {p.category}
-                </span>
-              </div>
-              <p className="mt-3 text-[17px] leading-relaxed text-white/55 md:hidden">
-                {p.blurb}
-              </p>
-              <p className="mt-1 hidden font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 md:block">
-                № {p.id}
-              </p>
-            </div>
-            <ArrowUpRight className="hidden h-5 w-5 shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-volt md:block" />
           </div>
         </Link>
       </BorderGlow>
@@ -912,8 +1019,6 @@ function ProjectCard({
     </div>
   );
 }
-
-const RATIOS = ["aspect-[4/3]", "aspect-square", "aspect-[4/5]", "aspect-[4/3]"];
 
 function TitleMarquee() {
   return (
@@ -974,18 +1079,13 @@ function FeaturedWork() {
         </div>
         <Reveal delay={0.08} className="mt-9">
           <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-white/40">
-            Twelve pieces — hover the frames for the story, click to open.
+            Twelve pieces — hover to tilt, click to open.
           </p>
         </Reveal>
         <TitleMarquee />
-        <div className="mt-16 grid gap-x-10 gap-y-20 md:grid-cols-2 md:gap-y-28">
-          {projects.map((p, i) => (
-            <ProjectCard
-              key={p.id}
-              p={p}
-              flip={i % 2 === 1}
-              ratio={RATIOS[i % RATIOS.length]}
-            />
+        <div className="mt-16 grid gap-5 md:grid-cols-2 md:gap-6">
+          {projects.map((p) => (
+            <ProjectCard key={p.id} p={p} />
           ))}
         </div>
       </div>
