@@ -1168,13 +1168,13 @@ function ProjectCard({ p }: { p: Project }) {
         className="relative [transform-style:preserve-3d]"
       >
       <BorderGlow
-        edgeSensitivity={14}
+        edgeSensitivity={30}
         glowColor="40 80 80"
-        backgroundColor="transparent"
-        borderRadius={22}
-        glowRadius={59}
-        glowIntensity={0.6}
-        coneSpread={20}
+        backgroundColor="#120F17"
+        borderRadius={28}
+        glowRadius={29}
+        glowIntensity={1.0}
+        coneSpread={25}
         animated={false}
         colors={["#c084fc", "#f472b6", "#38bdf8"]}
       >
@@ -1218,7 +1218,7 @@ function ProjectCard({ p }: { p: Project }) {
       <motion.span
         aria-hidden
         style={{ background: glare }}
-        className="pointer-events-none absolute inset-0 rounded-[22px]"
+        className="pointer-events-none absolute inset-0 rounded-[28px]"
       />
       </motion.div>
     </div>
