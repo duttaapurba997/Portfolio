@@ -189,6 +189,13 @@ function HeroCollage({ d }: { d: number }) {
     mx.set(0);
     my.set(0);
   };
+  const [art, setArt] = useState(true);
+  const imgRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const el = imgRef.current;
+    if (!el) return;
+    if (el.complete && el.naturalWidth === 0) setArt(false);
+  }, [art]);
 
   return (
     <motion.div
@@ -209,6 +216,17 @@ function HeroCollage({ d }: { d: number }) {
         className="absolute -left-40 bottom-10 hidden h-24 w-24 rotate-12 rounded-lg border border-white/10 lg:block"
       />
 
+      {art ? (
+        <motion.img
+          ref={imgRef}
+          src="/hero-collage.png"
+          alt="Design process collage — wireframes, laptop, notes and pen"
+          onError={() => setArt(false)}
+          style={reduce ? {} : { rotateX, rotateY }}
+          className="relative mt-[6%] h-auto w-full shadow-2xl shadow-black/50 transition-transform duration-500 ease-out [transform-style:preserve-3d] group-hover:scale-[1.01]"
+        />
+      ) : (
+        <>
       <motion.div
         style={reduce ? {} : { rotateX, rotateY }}
         className="relative mt-[10%] [transform-style:preserve-3d]"
@@ -306,6 +324,8 @@ function HeroCollage({ d }: { d: number }) {
       >
         ✳
       </motion.span>
+        </>
+      )}
     </motion.div>
   );
 }
@@ -588,12 +608,6 @@ function SectionDesigner() {
       id="designer"
       className="relative overflow-hidden bg-paper bg-grid-faint text-ink"
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -top-8 right-0 select-none font-serif text-[13rem] italic leading-none text-stroke text-ink/10 md:text-[18rem]"
-      >
-        01
-      </span>
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 01 — The Designer" />
         <div className="mt-14 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
@@ -1161,26 +1175,6 @@ function ProjectCard({ p }: { p: Project }) {
   );
 }
 
-function TitleMarquee() {
-  return (
-    <div className="relative overflow-hidden border-y border-white/10 bg-nightscreen/60 py-3.5">
-      <Ticker speed={70}>
-        {projects.map((p) => (
-          <span
-            key={p.id}
-            className="mx-6 flex items-center gap-5 font-serif text-xl italic text-white/65 md:text-2xl"
-          >
-            {p.title}
-            <span className="font-mono text-[10px] not-italic tracking-[0.2em] text-volt">
-              №{p.id}
-            </span>
-          </span>
-        ))}
-      </Ticker>
-    </div>
-  );
-}
-
 function FeaturedWork() {
   return (
     <section id="work" className="relative isolate overflow-hidden bg-night text-white">
@@ -1196,35 +1190,12 @@ function FeaturedWork() {
           disableRotation={false}
         />
       </div>
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-32 select-none font-serif text-[15rem] italic leading-none text-stroke text-volt/15"
-      >
-        03
-      </span>
-      <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-16 md:px-10 md:pb-36 md:pt-24">
+      <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-16 md:px-10 md:pb-24 md:pt-24">
         <ChapterHead kicker="Chapter 03 — The Work" dark />
         <div className="mt-14 flex flex-wrap items-end justify-between gap-6">
           <StoryTitle text="The proof, framed." accentWords={["framed."]} dark />
-          <Reveal className="pb-3">
-            <a
-              href={socials[0].href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/60 transition-colors hover:text-volt"
-            >
-              Full archive on Behance
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
-          </Reveal>
         </div>
-        <Reveal delay={0.08} className="mt-9">
-          <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-white/40">
-            Twelve pieces — hover to tilt, click to open.
-          </p>
-        </Reveal>
-        <TitleMarquee />
-        <div className="mt-16 grid gap-5 md:grid-cols-2 md:gap-6">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 md:gap-6">
           {projects.map((p) => (
             <ProjectCard key={p.id} p={p} />
           ))}
@@ -1249,22 +1220,21 @@ function SectionRoad() {
           disableRotation={false}
         />
       </div>
-      <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
+      <div className="mx-auto max-w-7xl px-6 pb-24 pt-16 md:px-10 md:pb-36 md:pt-24">
         <ChapterHead kicker="Chapter 04 — The Road" dark />
         <div className="mt-14">
           <StoryTitle
             text="The road so far."
             accentWords={["so", "far."]}
-            chapter="A short chronology"
             dark
           />
         </div>
-        <div className="relative mt-16 border-l border-white/15 pl-10 md:pl-14">
+        <div className="relative mt-10 border-l border-white/15 pl-10 md:pl-14">
           {experience.map((e, i) => (
             <Reveal key={e.company}>
               <div className={cn("relative", i < experience.length - 1 && "pb-14")}>
-                <span className="absolute -left-[16px] top-2 h-2.5 w-2.5 rounded-full bg-volt ring-4 ring-night" />
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-volt">
+                <p className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.24em] text-volt">
+                  <span aria-hidden className="h-2 w-2 shrink-0 rounded-full bg-volt" />
                   {e.period}
                 </p>
                 <div className="mt-3 grid gap-4 md:grid-cols-[1fr_1.7fr] md:gap-10">
@@ -1325,12 +1295,6 @@ function Epilogue() {
       id="contact"
       className="relative overflow-hidden bg-paper bg-grid-faint text-ink"
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 select-none font-serif text-[13rem] italic leading-none text-stroke text-ink/[0.07]"
-      >
-        05
-      </span>
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 05 — Epilogue" />
         <div className="mt-14 grid gap-14 lg:grid-cols-2 lg:gap-20">
