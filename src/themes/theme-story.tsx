@@ -768,7 +768,7 @@ function ToolMark({ name }: { name: string }) {
 function CraftProcessArt() {
   const reduce = useReducedMotion();
   return (
-    <div className="relative mx-auto w-full max-w-sm text-volt">
+    <div className="relative mx-auto w-full max-w-xl text-volt">
       {/* faint doodles drifting around the visual */}
       <motion.span
         aria-hidden
