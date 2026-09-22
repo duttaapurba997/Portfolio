@@ -64,6 +64,28 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "01",
+    title: "Swiggy x JioHotstar x Dhurandhar",
+    category: "Campaign",
+    tag: "Collaboration",
+    cover: "/collab-dhurandhar-card.png",
+    href: "#",
+    blurb: "A three-way streaming-meets-food collaboration for a blockbuster release.",
+    art: "/collab-dhurandhar-card.png",
+    board: "/collab-dhurandhar-board.png",
+  },
+  {
+    id: "02",
+    title: "Swiggy x JioHotstar x IPL",
+    category: "Campaign",
+    tag: "Collaboration",
+    cover: "/collab-ipl-card.png",
+    href: "#",
+    blurb: "Match-day food offers riding the IPL frenzy with JioHotstar.",
+    art: "/collab-ipl-card.png",
+    board: "/collab-ipl-board.png",
+  },
+  {
+    id: "03",
     title: "CRM Tool UI Design",
     category: "UI/UX",
     tag: "UI/UX",
@@ -75,7 +97,7 @@ export const projects: Project[] = [
     board: "/crm-board.png",
   },
   {
-    id: "02",
+    id: "04",
     title: "Rebranding — Electronic",
     category: "Branding",
     tag: "Branding",
@@ -87,7 +109,7 @@ export const projects: Project[] = [
     board: "/dell-board.png",
   },
   {
-    id: "03",
+    id: "05",
     title: "E-commerce Website UI",
     category: "UI/UX",
     tag: "E-commerce UI",
@@ -99,7 +121,7 @@ export const projects: Project[] = [
     board: "/ecom-board.png",
   },
   {
-    id: "04",
+    id: "06",
     title: "Merry Christmas — Festive Campaign",
     category: "Campaign",
     tag: "Holiday Campaign",
@@ -111,7 +133,7 @@ export const projects: Project[] = [
     board: "/xmas-board.png",
   },
   {
-    id: "05",
+    id: "07",
     title: "Festive Campaign — Mother's Day",
     category: "Campaign",
     tag: "Mother's Day",
@@ -123,7 +145,7 @@ export const projects: Project[] = [
     board: "/mom-board.png",
   },
   {
-    id: "06",
+    id: "08",
     title: "Interactive Campaign — Father's Day",
     category: "Campaign",
     tag: "Interactive",
@@ -135,7 +157,7 @@ export const projects: Project[] = [
     board: "/dad-board.png",
   },
   {
-    id: "07",
+    id: "09",
     title: "Indian Festive Campaign",
     category: "Campaign",
     tag: "Indian Festive",
@@ -147,7 +169,7 @@ export const projects: Project[] = [
     board: "/diwali-board.png",
   },
   {
-    id: "08",
+    id: "10",
     title: "Advertisements Projects",
     category: "Social · Ads",
     tag: "Ad Creatives",
@@ -159,7 +181,7 @@ export const projects: Project[] = [
     board: "/ads-board.png",
   },
   {
-    id: "09",
+    id: "11",
     title: "Carousel Projects",
     category: "Social · Ads",
     tag: "Carousels",
@@ -171,7 +193,7 @@ export const projects: Project[] = [
     board: "/carousel-board.png",
   },
   {
-    id: "10",
+    id: "12",
     title: "Packaging Design",
     category: "Packaging",
     tag: "Packaging",
@@ -183,7 +205,7 @@ export const projects: Project[] = [
     board: "/pack-board.png",
   },
   {
-    id: "11",
+    id: "13",
     title: "Logo Design",
     category: "Branding",
     tag: "Logo Design",
@@ -195,7 +217,7 @@ export const projects: Project[] = [
     board: "/logo-board.png",
   },
   {
-    id: "12",
+    id: "14",
     title: "Logo challenge 1",
     category: "Branding",
     tag: "Logo Design",
@@ -206,7 +228,7 @@ export const projects: Project[] = [
     board: "/logo-c1-board.png",
   },
   {
-    id: "13",
+    id: "15",
     title: "Logo challenge 2",
     category: "Branding",
     tag: "Logo Design",
@@ -215,28 +237,6 @@ export const projects: Project[] = [
     blurb: "A pasta-cloud-kitchen identity with flavour and rhythm.",
     art: "/logo-c2-card.png",
     board: "/logo-c2-board.png",
-  },
-  {
-    id: "14",
-    title: "Swiggy x JioHotstar x Dhurandhar",
-    category: "Campaign",
-    tag: "Collaboration",
-    cover: "/collab-dhurandhar-card.png",
-    href: "#",
-    blurb: "A three-way streaming-meets-food collaboration for a blockbuster release.",
-    art: "/collab-dhurandhar-card.png",
-    board: "/collab-dhurandhar-board.png",
-  },
-  {
-    id: "15",
-    title: "Swiggy x JioHotstar x IPL",
-    category: "Campaign",
-    tag: "Collaboration",
-    cover: "/collab-ipl-card.png",
-    href: "#",
-    blurb: "Match-day food offers riding the IPL frenzy with JioHotstar.",
-    art: "/collab-ipl-card.png",
-    board: "/collab-ipl-board.png",
   },
 ];
 
