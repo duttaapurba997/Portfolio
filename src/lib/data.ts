@@ -95,6 +95,8 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/7eeb80180598107.Y3JvcCwzMTQzLDI0NTksNTI5LDA.png",
     href: "https://www.behance.net/gallery/180598107/E-commerce-website-UI",
     blurb: "Product-first storefront design built to convert.",
+    art: "/ecom-card.png",
+    board: "/ecom-board.png",
   },
   {
     id: "04",
@@ -105,6 +107,8 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/e7d174223373985.Y3JvcCwzMTQzLDI0NTksNDI3LDA.png",
     href: "https://www.behance.net/gallery/223373985/Merry-Christmas-Festive-campaign",
     blurb: "A warm holiday campaign with custom illustration.",
+    art: "/xmas-card.png",
+    board: "/xmas-board.png",
   },
   {
     id: "05",
@@ -115,6 +119,8 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/eded8e208651001.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/208651001/Festive-campaign-(mothers-day)",
     blurb: "Emotional storytelling for the biggest gifting day.",
+    art: "/mom-card.png",
+    board: "/mom-board.png",
   },
   {
     id: "06",
@@ -125,6 +131,8 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/7182d3208651645.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/208651645/Interactive-campaign-(Fathers-day)",
     blurb: "A playful, interactive moment for Father's Day.",
+    art: "/dad-card.png",
+    board: "/dad-board.png",
   },
   {
     id: "07",
@@ -135,19 +143,11 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/aad9e6212853771.Y3JvcCwzMTQzLDI0NTksMzk2LDA.png",
     href: "https://www.behance.net/gallery/212853771/Indian-Festive-Campaign",
     blurb: "Rooted in Indian festive richness and ritual color.",
+    art: "/diwali-card.png",
+    board: "/diwali-board.png",
   },
   {
     id: "08",
-    title: "Banner Projects",
-    category: "Social · Ads",
-    tag: "Banners",
-    cover:
-      "https://mir-s3-cdn-cf.behance.net/projects/404/dc5a2c185724507.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
-    href: "https://www.behance.net/gallery/185724507/Banner-projects",
-    blurb: "A system of banners that stay sharp at every size.",
-  },
-  {
-    id: "09",
     title: "Advertisements Projects",
     category: "Social · Ads",
     tag: "Ad Creatives",
@@ -155,9 +155,11 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/daaef8185723577.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/185723577/Advertisements-projects",
     blurb: "Ad creatives engineered for the thumb-scroll.",
+    art: "/ads-card.png",
+    board: "/ads-board.png",
   },
   {
-    id: "10",
+    id: "09",
     title: "Carousel Projects",
     category: "Social · Ads",
     tag: "Carousels",
@@ -165,26 +167,32 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/dfb44f185713113.Y3JvcCwzMTQzLDI0NTksNTI5LDA.png",
     href: "https://www.behance.net/gallery/185713113/Carousel-projects",
     blurb: "Story-led carousels that people actually swipe.",
+    art: "/carousel-card.png",
+    board: "/carousel-board.png",
   },
   {
-    id: "11",
-    title: "Packaging Design — Edible Oils",
+    id: "10",
+    title: "Packaging Design",
     category: "Packaging",
     tag: "Packaging",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/187bb4148367831.Y3JvcCw5NDMsNzM3LDAsNDI.png",
     href: "https://www.behance.net/gallery/148367831/Packaging-design-2",
     blurb: "Shelf-first packaging that feels premium and honest.",
+    art: "/pack-card.png",
+    board: "/pack-board.png",
   },
   {
-    id: "12",
-    title: "Logo Design — Set of Marks",
+    id: "11",
+    title: "Logo Design",
     category: "Branding",
     tag: "Logo Design",
     cover:
       "https://mir-s3-cdn-cf.behance.net/projects/404/c8bf59147595087.Y3JvcCw3MzIsNTcyLDg1LDA.png",
     href: "https://www.behance.net/gallery/147595087/Logo-design-1",
     blurb: "Distinctive wordmarks and symbols with real character.",
+    art: "/logo-card.png",
+    board: "/logo-board.png",
   },
 ];
 
