@@ -139,6 +139,7 @@ export function ProjectDetail({ project, projects }: { project: Project; project
                 >
                   Back to all work
                 </Link>
+                {project.href !== "#" && (
                 <a
                   href={project.href}
                   target="_blank"
@@ -147,6 +148,7 @@ export function ProjectDetail({ project, projects }: { project: Project; project
                 >
                   Full case · Behance <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
+                )}
               </div>
             </div>
             <div className="space-y-0">

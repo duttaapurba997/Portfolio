@@ -194,6 +194,28 @@ export const projects: Project[] = [
     art: "/logo-card.png",
     board: "/logo-board.png",
   },
+  {
+    id: "12",
+    title: "Logo challenge 1",
+    category: "Branding",
+    tag: "Logo Design",
+    cover: "/logo-c1-card.png",
+    href: "#",
+    blurb: "A burger-cloud-kitchen mark where taste meets imagination.",
+    art: "/logo-c1-card.png",
+    board: "/logo-c1-board.png",
+  },
+  {
+    id: "13",
+    title: "Logo challenge 2",
+    category: "Branding",
+    tag: "Logo Design",
+    cover: "/logo-c2-card.png",
+    href: "#",
+    blurb: "A pasta-cloud-kitchen identity with flavour and rhythm.",
+    art: "/logo-c2-card.png",
+    board: "/logo-c2-board.png",
+  },
 ];
 
 export type Role = {
