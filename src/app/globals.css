@@ -229,6 +229,15 @@
   animation: gradient-text-shift linear infinite;
 }
 
+@keyframes loader-slide {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(280%); }
+}
+
+.loader-bar {
+  animation: loader-slide 1.2s ease-in-out infinite;
+}
+
 @media print {
   @page {
     margin: 12mm;

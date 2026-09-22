@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -7,6 +8,9 @@ import type { Project } from "@/lib/data";
 import { EASE } from "@/lib/anim";
 import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
+
+// Failsafe: never trap the viewer behind the loader longer than this.
+const LOAD_FAILSAFE_MS = 20000;
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
@@ -22,8 +26,45 @@ export function ProjectDetail({ project, projects }: { project: Project; project
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
 
+  const [visualReady, setVisualReady] = useState(false);
+  const visualRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    // Reset per project: prev/next navigation reuses this route component.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setVisualReady(false);
+    const t = window.setTimeout(() => setVisualReady(true), LOAD_FAILSAFE_MS);
+    // Cached visuals may never fire a load event — reveal immediately.
+    const img = visualRef.current;
+    if (img && img.complete && img.naturalWidth > 0) {
+      window.clearTimeout(t);
+      setVisualReady(true);
+    }
+    return () => window.clearTimeout(t);
+  }, [project.id]);
+
   return (
     <div className="relative min-h-screen bg-night font-sans text-white">
+      <div
+        id="detail-loader"
+        aria-hidden={visualReady}
+        className={`fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-night transition-opacity duration-500 ${
+          visualReady ? "pointer-events-none opacity-0" : "opacity-100"
+        }`}
+      >
+        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-volt">
+          The Work — №{project.id}
+        </p>
+        <p className="max-w-md px-6 text-center font-serif text-2xl italic leading-snug text-white/85 md:text-3xl">
+          {project.title}
+        </p>
+        <div className="h-px w-44 overflow-hidden bg-white/10">
+          <div className="loader-bar h-full w-2/5 bg-volt" />
+        </div>
+        <p className="font-mono text-[9px] uppercase tracking-[0.24em] text-white/40">
+          Loading the work
+        </p>
+      </div>
       <div className="absolute inset-0">
         <Particles
           particleColors={["#caffff"]}
@@ -85,8 +126,12 @@ export function ProjectDetail({ project, projects }: { project: Project; project
             {project.board ? (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
+                key={project.id}
+                ref={visualRef}
                 src={project.board}
                 alt={`${project.title} — full case study`}
+                onLoad={() => setVisualReady(true)}
+                onError={() => setVisualReady(true)}
                 className="h-auto w-full rounded-2xl border border-white/10"
               />
             ) : (
@@ -111,8 +156,12 @@ export function ProjectDetail({ project, projects }: { project: Project; project
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
+                  key={project.id}
+                  ref={visualRef}
                   src={project.cover}
                   alt={project.title}
+                  onLoad={() => setVisualReady(true)}
+                  onError={() => setVisualReady(true)}
                   className="relative z-10 max-h-[66vh] w-auto max-w-full object-contain drop-shadow-2xl"
                 />
               </div>
