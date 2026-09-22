@@ -694,7 +694,7 @@ function SectionDesigner() {
     >
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 01 — The Designer" />
-        <div className="mt-8 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
+        <div className="mt-4 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
           <div className="md:sticky md:top-28 md:self-start">
             <Reveal>
               <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
@@ -735,7 +735,7 @@ function SectionDesigner() {
               accentWords={["pixels."]}
             />
             <Reveal delay={0.05}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink/80">
                 Fashion school taught me taste. Five and a half years at
                 India&apos;s fastest consumer platforms turned it into a weapon —
                 campaigns, brand systems and interfaces people stop on.
@@ -1316,11 +1316,11 @@ function Epilogue() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 05 — Epilogue" />
-        <div className="mt-8 grid gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="mt-4 grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <StoryTitle text="Your story starts with hello." accentWords={["hello."]} />
             <Reveal delay={0.08}>
-              <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-ink/70">
+              <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink/70">
                 {profile.status}. If that sounds like your team — tell me what
                 you&apos;re building and I&apos;ll bring the story to it.
               </p>
