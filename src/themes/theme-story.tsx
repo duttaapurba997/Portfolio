@@ -30,7 +30,6 @@ import {
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import Particles from "@/components/Particles";
-import { PulsingBorder } from "@paper-design/shaders-react";
 import { BorderGlow } from "@/components/BorderGlow";
 
 function WordReveal({
@@ -904,33 +903,8 @@ function SectionCraft() {
             {tools.map((t) => (
               <span
                 key={t}
-                className="relative mx-3 inline-flex shrink-0 items-center gap-3 overflow-hidden rounded-full border border-transparent bg-white/[0.04] py-2 pl-2 pr-6 backdrop-blur-md"
+                className="mx-3 inline-flex shrink-0 items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] py-2 pl-2 pr-6 backdrop-blur-md"
               >
-                <span aria-hidden className="absolute inset-0 -z-10">
-                  <PulsingBorder
-                    width="100%"
-                    height="100%"
-                    colors={["#0dfdc973", "#09808b"]}
-                    colorBack="#000000"
-                    roundness={0.16}
-                    thickness={0.03}
-                    softness={1}
-                    aspectRatio="auto"
-                    intensity={0.2}
-                    bloom={0.25}
-                    spots={4}
-                    spotSize={0.5}
-                    pulse={0.25}
-                    smoke={0.3}
-                    smokeSize={0.6}
-                    speed={1}
-                    scale={0.6}
-                    marginLeft={0}
-                    marginRight={0}
-                    marginTop={0}
-                    marginBottom={0}
-                  />
-                </span>
                 <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/[0.06]">
                   <ToolMark name={t} />
                 </span>
