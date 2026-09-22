@@ -31,6 +31,7 @@ import {
 import { cn } from "@/lib/utils";
 import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
+import GradientText from "@/components/GradientText";
 
 function useShownOnScroll<T extends HTMLElement>(threshold = 0.85) {
   const ref = useRef<T | null>(null);
@@ -449,12 +450,18 @@ function Hero() {
             </span>
             <span className="mt-2 block overflow-hidden">
               <motion.span
-                className="relative inline-block text-volt"
+                className="relative inline-block"
                 initial={{ y: "112%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, delay: d + 0.16, ease: EASE }}
               >
-                {heroSticky.headlineAccent}
+                <GradientText
+                  colors={["#6366F1", "#06d4bf", "#06B6D4"]}
+                  animationSpeed={3}
+                  showBorder={false}
+                >
+                  {heroSticky.headlineAccent}
+                </GradientText>
                 <Squiggle className="absolute -bottom-3 left-0 text-volt" />
               </motion.span>
             </span>
