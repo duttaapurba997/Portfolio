@@ -83,6 +83,8 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/7ef179237528709.Y3JvcCwyMDk2LDE2NDAsMzUyLDA.png",
     href: "https://www.behance.net/gallery/237528709/Rebranding-electronic",
     blurb: "A full identity refresh for an electronics brand.",
+    art: "/dell-card.png",
+    board: "/dell-board.png",
   },
   {
     id: "03",
