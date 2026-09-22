@@ -56,7 +56,7 @@ function WordReveal({
               className={`inline-block will-change-transform ${accent ? accentClassName : ""}`}
               initial={{ y: "112%" }}
               whileInView={{ y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, margin: "0px" }}
               transition={{ duration: 0.7, delay: delay + i * 0.05, ease: EASE }}
             >
               {w}
@@ -660,7 +660,7 @@ function SectionDesigner() {
     >
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 01 — The Designer" />
-        <div className="mt-14 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
+        <div className="mt-10 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
           <div className="md:sticky md:top-28 md:self-start">
             <Reveal>
               <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
@@ -701,7 +701,7 @@ function SectionDesigner() {
               accentWords={["pixels."]}
             />
             <Reveal delay={0.05}>
-              <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink/80">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
                 Fashion school taught me taste. Five and a half years at
                 India&apos;s fastest consumer platforms turned it into a weapon —
                 campaigns, brand systems and interfaces people stop on.
@@ -1282,11 +1282,11 @@ function Epilogue() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 05 — Epilogue" />
-        <div className="mt-14 grid gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="mt-10 grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <StoryTitle text="Your story starts with hello." accentWords={["hello."]} />
             <Reveal delay={0.08}>
-              <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-ink/70">
+              <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-ink/70">
                 {profile.status}. If that sounds like your team — tell me what
                 you&apos;re building and I&apos;ll bring the story to it.
               </p>
@@ -1318,19 +1318,19 @@ function Epilogue() {
             </Reveal>
           </div>
           <Reveal>
-            <div className="rounded-2xl border border-ink/10 p-8 md:p-10">
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-ink/40">
+            <div className="rounded-2xl border border-white/10 bg-night p-8 text-white md:p-10">
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/40">
                 Off the clock
               </p>
               <div className="mt-7">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ember">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-volt">
                   Languages
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {languages.map((l) => (
                     <span
                       key={l}
-                      className="rounded-full border border-ink/15 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em]"
+                      className="rounded-full border border-paper/40 bg-paper px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink"
                     >
                       {l}
                     </span>
@@ -1338,14 +1338,14 @@ function Epilogue() {
                 </div>
               </div>
               <div className="mt-7">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ember">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-volt">
                   Interests
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {interests.map((it) => (
                     <span
                       key={it}
-                      className="rounded-full bg-paperdeep px-4 py-1.5 font-serif text-sm italic"
+                      className="rounded-full border border-paper/40 bg-paper px-4 py-1.5 font-serif text-sm italic text-ink"
                     >
                       {it}
                     </span>
