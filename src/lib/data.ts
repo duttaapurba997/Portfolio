@@ -216,6 +216,28 @@ export const projects: Project[] = [
     art: "/logo-c2-card.png",
     board: "/logo-c2-board.png",
   },
+  {
+    id: "14",
+    title: "Swiggy x JioHotstar x Dhurandhar",
+    category: "Campaign",
+    tag: "Collaboration",
+    cover: "/collab-dhurandhar-card.png",
+    href: "#",
+    blurb: "A three-way streaming-meets-food collaboration for a blockbuster release.",
+    art: "/collab-dhurandhar-card.png",
+    board: "/collab-dhurandhar-board.png",
+  },
+  {
+    id: "15",
+    title: "Swiggy x JioHotstar x IPL",
+    category: "Campaign",
+    tag: "Collaboration",
+    cover: "/collab-ipl-card.png",
+    href: "#",
+    blurb: "Match-day food offers riding the IPL frenzy with JioHotstar.",
+    art: "/collab-ipl-card.png",
+    board: "/collab-ipl-board.png",
+  },
 ];
 
 export type Role = {
