@@ -697,13 +697,12 @@ function SectionDesigner() {
         <div className="mt-4 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
           <div className="md:sticky md:top-28 md:self-start">
             <Reveal>
-              <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
-                <div className="absolute inset-0 bg-gradient-to-br from-ember/60 via-paperdeep to-moss/50" />
-                <span className="absolute inset-0 grid place-items-center">
-                  <span className="select-none font-serif text-[11rem] italic leading-none text-ink/15 mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-[1.06]">
-                    AD
-                  </span>
-                </span>
+              <div className="group relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
+                <img
+                  src="/designer-portrait.jpg"
+                  alt="Portrait of Apurba Dutta"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
                 <span className="absolute left-4 top-4 -rotate-3 rounded-md bg-ink px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.2em] text-paper">
                   Senior Graphic Designer
                 </span>
