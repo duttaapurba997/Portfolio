@@ -32,6 +32,38 @@ import { cn } from "@/lib/utils";
 import Particles from "@/components/Particles";
 import { BorderGlow } from "@/components/BorderGlow";
 
+function useShownOnScroll<T extends HTMLElement>(threshold = 0.85) {
+  const ref = useRef<T | null>(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const check = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * threshold && r.bottom > 0) {
+          setShown(true);
+        }
+      });
+    };
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    window.addEventListener("load", check);
+    const t = window.setTimeout(check, 1500);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+      window.removeEventListener("load", check);
+      window.clearTimeout(t);
+      cancelAnimationFrame(raf);
+    };
+  }, [threshold]);
+  return { ref, shown };
+}
+
 function WordReveal({
   text,
   accentWords = [],
@@ -46,17 +78,19 @@ function WordReveal({
   accentClassName?: string;
 }) {
   const words = text.split(" ");
+  const clean = (s: string) => s.replace(/[^a-zA-Z]/g, "");
+  const accented = accentWords.map(clean);
+  const { ref, shown } = useShownOnScroll<HTMLSpanElement>();
   return (
-    <span className={className}>
+    <span ref={ref} className={className}>
       {words.map((w, i) => {
-        const accent = accentWords.includes(w.replace(/[^a-zA-Z]/g, ""));
+        const accent = accented.includes(clean(w));
   return (
           <span key={w + i} className="inline-block overflow-hidden align-bottom">
             <motion.span
               className={`inline-block will-change-transform ${accent ? accentClassName : ""}`}
               initial={{ y: "112%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true, margin: "0px" }}
+              animate={shown ? { y: 0 } : { y: "112%" }}
               transition={{ duration: 0.7, delay: delay + i * 0.05, ease: EASE }}
             >
               {w}
@@ -660,7 +694,7 @@ function SectionDesigner() {
     >
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 01 — The Designer" />
-        <div className="mt-10 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
+        <div className="mt-8 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
           <div className="md:sticky md:top-28 md:self-start">
             <Reveal>
               <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
@@ -670,10 +704,10 @@ function SectionDesigner() {
                     AD
                   </span>
                 </span>
-                <span className="absolute left-5 top-5 -rotate-3 rounded-md bg-ink px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.2em] text-paper">
+                <span className="absolute left-4 top-4 -rotate-3 rounded-md bg-ink px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.2em] text-paper">
                   Senior Graphic Designer
                 </span>
-                <span className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-paper/85 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.2em] text-ink backdrop-blur-sm">
+                <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-paper/85 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.2em] text-ink backdrop-blur-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-moss" />
                   Est. 2019 — Bengaluru
                 </span>
@@ -1282,7 +1316,7 @@ function Epilogue() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <ChapterHead kicker="Chapter 05 — Epilogue" />
-        <div className="mt-10 grid gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="mt-8 grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <StoryTitle text="Your story starts with hello." accentWords={["hello."]} />
             <Reveal delay={0.08}>
