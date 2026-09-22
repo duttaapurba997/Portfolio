@@ -82,6 +82,14 @@ export function ProjectDetail({ project, projects }: { project: Project; project
             transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
             className="mt-12"
           >
+            {project.board ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={project.board}
+                alt={`${project.title} — full case study`}
+                className="h-auto w-full rounded-2xl border border-white/10"
+              />
+            ) : (
             <BorderGlow
               edgeSensitivity={42}
               glowColor="40 80 80"
@@ -109,6 +117,7 @@ export function ProjectDetail({ project, projects }: { project: Project; project
                 />
               </div>
             </BorderGlow>
+            )}
           </motion.div>
 
           <div className="mt-12 grid gap-8 md:grid-cols-[1fr_280px]">
@@ -117,9 +126,11 @@ export function ProjectDetail({ project, projects }: { project: Project; project
                 The work
               </p>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/60">
-                {project.blurb} Presented full-frame above, at native
+                {project.board
+                  ? `${project.blurb} The entire case board, top to bottom — scroll through every phase at full resolution.`
+                  : `${project.blurb} Presented full-frame above, at native
                 resolution — no crops, no thumbnails. Hover the edges of the
-                frame to light it up.
+                frame to light it up.`}
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
                 <Link

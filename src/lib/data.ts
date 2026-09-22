@@ -57,6 +57,8 @@ export type Project = {
   cover: string;
   href: string;
   blurb: string;
+  art?: string;
+  board?: string;
 };
 
 export const projects: Project[] = [
@@ -69,6 +71,8 @@ export const projects: Project[] = [
       "https://mir-s3-cdn-cf.behance.net/projects/404/c69803180565011.Y3JvcCw5NzAsNzU5LDIxMywzMQ.png",
     href: "https://www.behance.net/gallery/180565011/CRM-Tool-UI-Design",
     blurb: "A clean, data-dense CRM workspace with a calm hierarchy.",
+    art: "/crm-card.png",
+    board: "/crm-board.png",
   },
   {
     id: "02",

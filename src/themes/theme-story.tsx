@@ -1127,7 +1127,16 @@ function ProjectCard({ p }: { p: Project }) {
                 className="absolute inset-0 -rotate-2 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-sm transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:-rotate-4"
               />
               <div className="relative flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#164449] via-[#0C2429] to-[#071315] text-volt transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-                <CardArt id={p.id} />
+                {p.art ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={p.art}
+                    alt={p.title}
+                    className="w-[88%] object-contain"
+                  />
+                ) : (
+                  <CardArt id={p.id} />
+                )}
                 <span aria-hidden className="absolute left-[16%] top-[14%] animate-pulse text-[13px] leading-none text-volt/90">
                   ✦
                 </span>
