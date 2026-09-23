@@ -6,7 +6,7 @@ export const profile = {
   location: "Bengaluru, India",
   status: "Aiming for a Lead Designer role",
   memberSince: 2019,
-  experience: "5.5 years",
+  experience: "5.6 years",
   summary:
     "Innovative design leader with 5.5 years of experience in developing comprehensive visual systems for high-growth consumer platforms, including performance marketing, brand partnerships, and product design. Expertise in enhancing design workflows through Figma, mentoring design teams, and aligning visual strategies with business objectives. Aiming for a Lead Designer role to drive creative initiatives and foster team collaboration.",
   email: "duttaapurba997@gmail.com",
@@ -252,7 +252,7 @@ export const experience: Role[] = [
   {
     company: "Swiggy",
     role: "Senior Graphic Designer",
-    period: "01/2024 — Present",
+    period: "01/2024 — 07/2026",
     place: "Bengaluru, India",
     points: [
       "Owned end-to-end design for credit card product promotions, translating financial features into conversion-driven campaigns.",

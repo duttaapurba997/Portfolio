@@ -705,7 +705,7 @@ function SectionDesigner() {
         <div className="mt-4 grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
           <div className="md:sticky md:top-28 md:self-start">
             <Reveal>
-              <div className="group relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
+              <div className="group relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-ink/10 transition-transform duration-500 ease-out hover:-rotate-1">
                 <img
                   src="/designer-portrait.jpg"
                   alt="Portrait of Apurba Dutta"
@@ -719,21 +719,6 @@ function SectionDesigner() {
                   Est. 2019 — Bengaluru
                 </span>
               </div>
-            </Reveal>
-            <Reveal delay={0.1} className="mt-6">
-              <dl className="grid grid-cols-2 divide-x divide-ink/10 border-y border-ink/10">
-                {[
-                  ["Based", profile.location],
-                  ["Since", "2019"],
-                ].map(([k, v]) => (
-                  <div key={k} className="px-4 py-4 first:pl-0 last:pr-0">
-                    <dt className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink/45">
-                      {k}
-                    </dt>
-                    <dd className="mt-1.5 truncate font-serif text-[15px]">{v}</dd>
-                  </div>
-                ))}
-              </dl>
             </Reveal>
           </div>
           <div>
@@ -1374,6 +1359,7 @@ function Epilogue() {
                       className="rounded-full border border-paper/40 bg-paper px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink"
                     >
                       {l}
+                      {l === "Japanese" && <span className="text-ink/50"> · Basic</span>}
                     </span>
                   ))}
                 </div>
