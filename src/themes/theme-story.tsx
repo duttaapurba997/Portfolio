@@ -183,13 +183,14 @@ function Nav() {
             </a>
           ))}
         </nav>
-        <Link
-          href="/resume?download=1"
+        <a
+          href="/resume.pdf"
+          download="Apurba-Dutta-Resume.pdf"
           className="inline-flex items-center gap-2 rounded-full bg-volt px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-night transition-transform hover:scale-[1.03]"
         >
           <Download className="h-3.5 w-3.5" />
           Resume
-        </Link>
+        </a>
       </div>
     </motion.header>
   );
