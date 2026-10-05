@@ -732,24 +732,18 @@ function SectionDesigner() {
                 India&apos;s fastest consumer platforms turned it into a weapon —
                 campaigns, brand systems and interfaces people stop on.
               </p>
-              <p className="mt-6 flex max-w-2xl gap-3 text-sm leading-relaxed text-ink/55">
-                <span className="shrink-0 select-none font-serif text-lg italic leading-none text-ember">
-                  &ldquo;
-                </span>
-                <span>{profile.summary}</span>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
+                {profile.summary}
               </p>
             </Reveal>
             <Reveal delay={0.12} className="mt-12">
-              <blockquote className="relative rounded-r-2xl border-l-2 border-ember bg-paperdeep/70 py-6 pl-8 pr-6">
-                <p className="font-serif text-xl italic leading-snug text-ink md:text-2xl">
-                  &ldquo;Detail-oriented, organized and meticulous. Creative,
-                  with a talent for developing unique custom artwork — and an
-                  innovative approach to ideas and concept development.&rdquo;
-                </p>
-                <footer className="mt-3 font-mono text-[10px] uppercase tracking-[0.24em] text-ink/50">
-                  — Apurba Dutta
-                </footer>
-              </blockquote>
+                <blockquote className="relative rounded-r-2xl border-l-2 border-ember bg-paperdeep/70 py-6 pl-8 pr-6">
+                  <p className="font-serif text-xl leading-snug text-ink md:text-2xl">
+                    &ldquo;Detail-oriented, organized and meticulous. Creative,
+                    with a talent for developing unique custom artwork — and an
+                    innovative approach to ideas and concept development.&rdquo;
+                  </p>
+                </blockquote>
             </Reveal>
           </div>
         </div>
