@@ -64,7 +64,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "01",
-    title: "Credit Cards",
+    title: "Credit cards x HDFC",
     category: "Campaign",
     tag: "Performance marketing",
     cover: "/blck-card.png",
